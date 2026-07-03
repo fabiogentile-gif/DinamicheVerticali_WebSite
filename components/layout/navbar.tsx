@@ -81,7 +81,7 @@ export default function NavBar() {
     };
 
     return (
-        <nav className="flex items-center justify-between p-5 border-b-2 border-amber-500">
+        <nav className="fixed top-0 left-0 z-50 w-full flex items-center justify-between border-b-2 border-primary bg-white px-5 py-5">
             {/* LOGO */}
             <Image
                 src="/logo/logo-dinamiche-verticali-formazione.svg"
