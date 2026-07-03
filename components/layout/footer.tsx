@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
     return (
-        <footer className=" border-t-3 border-amber-500">
+        <footer className=" border-t-3 border-primary">
             <div className="flex p-5 justify-around items-center mx-20">
                 <div>
                     <Image
@@ -45,7 +45,7 @@ export default function Footer() {
                 <div>
                     <h3 className="text-xl font-semibold">Contattaci</h3>
                     <div>
-                        <h3 className="text-amber-500 text-xl">+39 011 27 32 500</h3>
+                        <h3 className="text-primary text-xl">+39 011 27 32 500</h3>
                         <p className="text-sm">(dalle 08:30 alle 17:30 ; Lun-Ven)</p>
                         <p>formazione@petzl.it</p>
                         <p>Via G. Battista Feroggio, 54, 10151 Torino</p>
