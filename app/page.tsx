@@ -1,10 +1,38 @@
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card"
 
 import EmblaCarousel from "@/components/home/EmblaCarousel";
-import Filter from "@/components/ui/Filter";
 import CardCorsi from "@/components/home/CardCorsi";
+import CalendarioCorsi from "@/components/home/CalendarioCorsi";
+import Filters from "@/components/home/Filters";
 
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams: {
+    name?: string
+    category?: string
+    duration?: string
+  }
+}) {
+
+  const courses = await getCourses()
+
+  const filtered = courses.filter((c) => {
+    if (searchParams.name &&
+      !c.name.toLowerCase().includes(searchParams.name.toLowerCase())
+    ) return false
+
+    if (searchParams.category &&
+      c.category !== searchParams.category
+    ) return false
+
+    if (searchParams.duration &&
+      c.duration !== Number(searchParams.duration)
+    ) return false
+
+    return true
+  })
+
   return (
     <div className="pt-24">
       <main>
@@ -12,21 +40,24 @@ export default function Home() {
           <EmblaCarousel />
         </section>
 
+        {/* CORSI */}
         <section id="corsi" className="flex flex-col items-center w-full my-10">
-          <h1 className="text-primary my-10 text-center">
-            CORSI
-          </h1>
 
-          <div className="flex justify-center w-full">
+          <div className="flex justify-center w-full my-15">
             <div className="w-[80%]">
-              <Card>
-                <CardHeader>
-                  <CardTitle>X Corsi disponibili</CardTitle>
-                </CardHeader>
-              </Card>
-
+              <h2 className="text-xl font-bold">
+                I NOSTRI <span className="text-primary">CORSI</span>
+              </h2>
               <div className="flex justify-center my-10">
-                <Filter />
+                <div className="pt-24">
+                  <Filters />
+
+                  <div className="grid grid-cols-3 gap-4 mt-6">
+                    {filtered.map((course) => (
+                      <div key={course.id}>{course.name}</div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="grid grid-cols-4 gap-4">
@@ -43,8 +74,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="calendario" className="my-10">
-          {/* calendario */}
+        {/* calendario */}
+        <section id="calendario" className="my-20">
+          <CalendarioCorsi />
         </section>
       </main>
     </div>

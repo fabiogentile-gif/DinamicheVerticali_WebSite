@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Course {
+  id          String   @id @default(cuid())
+
+  title       String
+  description String?
+
+  // Branding / UI
+  logo        String?   // url immagine logo
+  tags        String[]  // es: ["IRATA", "LUGLIO"]
+
+  // Categoria filtro
+  category    String    // es: "certificazione", "sicurezza", ecc.
+
+  // Date
+  startDate   DateTime
+  endDate     DateTime?
+
+  // Durata (utile per UI tipo "4 gg + 1 esame")
+  durationDays Int?
+  examDays     Int?
+
+  // UI badge o evidenza
+  featured    Boolean   @default(false)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
