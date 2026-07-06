@@ -9,70 +9,109 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Slider } from "@/components/ui/slider"
+
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
+import { Corsi } from "@/data/data"
+
 
 export default function Filters() {
   const router = useRouter()
   const params = useSearchParams()
 
+  const parsed = Number(params.get("duration"));
+
   const [name, setName] = useState(params.get("name") ?? "")
   const [category, setCategory] = useState(params.get("category") ?? "")
-  const [duration, setDuration] = useState(params.get("duration") ?? "")
+  const [duration, setDuration] = useState<number[]>([
+    Number.isFinite(parsed) && parsed > 0 ? parsed : 30,
+  ]);
 
   function applyFilters() {
     const query = new URLSearchParams()
 
     if (name) query.set("name", name)
     if (category) query.set("category", category)
-    if (duration) query.set("duration", duration)
+
+    if (duration) {
+      query.set("duration", String(duration[0]))
+    }
 
     router.push(`?${query.toString()}`)
   }
+
+  function cleanFilters() {
+    setName("")
+    setCategory("")
+    setDuration([0])
+
+    router.push("?page=1")
+  }
+
 
   return (
     <div className="w-full flex flex-col md:flex-row gap-4 items-end p-4 border rounded-xl bg-white">
 
       {/* Nome */}
-      <div className="flex flex-col w-full md:w-1/3">
+      <div className="flex-[2]">
         <Input
           placeholder="Cerca corso..."
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="h-11"
         />
       </div>
 
       {/* Categoria */}
-      <div className="w-full md:w-1/4">
+      <div className="flex-1">
         <Select value={category} onValueChange={setCategory}>
-          <SelectTrigger>
+          <SelectTrigger className="h-11 w-full">
             <SelectValue placeholder="Categoria" />
           </SelectTrigger>
+
           <SelectContent>
-            <SelectItem value="fitness">Fitness</SelectItem>
-            <SelectItem value="yoga">Yoga</SelectItem>
-            <SelectItem value="boxe">Boxe</SelectItem>
+            {Corsi.map((cat) => (
+              <SelectItem key={cat.title} value={cat.title}>
+                {cat.title}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
 
       {/* Durata */}
-      <div className="w-full md:w-1/4">
-        <Select value={duration} onValueChange={setDuration}>
-          <SelectTrigger>
-            <SelectValue placeholder="Durata" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="30">30 min</SelectItem>
-            <SelectItem value="60">60 min</SelectItem>
-            <SelectItem value="90">90 min</SelectItem>
-          </SelectContent>
-        </Select>
+      <div className="flex-1">
+        <div className="flex flex-col gap-1">
+          <span className="text-l text-muted-foreground">
+            Durata: {duration[0]} giorni
+          </span>
+
+          <Slider
+            value={duration}
+            min={1}
+            max={10}
+            step={1}
+            onValueChange={setDuration}
+          />
+        </div>
       </div>
 
-      <Button onClick={applyFilters}>
-        Filtra
-      </Button>
-    </div>
+      {/* Bottoni */}
+      <div className="flex gap-2">
+        <Button onClick={applyFilters} className="h-11 px-5">
+          Filtra
+        </Button>
+
+        <Button
+          onClick={cleanFilters}
+          variant="outline"
+          className="h-11 px-5"
+        >
+          Pulisci
+        </Button>
+      </div>
+
+    </div >
   )
 }

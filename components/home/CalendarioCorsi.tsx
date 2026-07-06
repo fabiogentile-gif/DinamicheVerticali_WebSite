@@ -99,7 +99,7 @@ export default function CalendarioCorsi() {
                   {dayCourses.map((c, idx) => (
                     <div
                       key={idx}
-                      className="text-xs bg-primary text-primary-foreground rounded px-1 py-[2px]"
+                      className="text-xs bg-primary text-primary-foreground rounded px-1"
                     >
                       {c.title}
                     </div>

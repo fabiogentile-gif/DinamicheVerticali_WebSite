@@ -29,7 +29,10 @@ export const Corsi = [
   },
     {
     id: 8,
-    title: "SORPRESA",
+    title: "ITRA",
   },
-
+      {
+    id: 9,
+    title: "SPAZI CONFINATI",
+  },
 ];

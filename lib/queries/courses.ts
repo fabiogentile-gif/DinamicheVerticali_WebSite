@@ -1,18 +1,22 @@
-import { prisma } from "@/lib/db/prisma"
+import { prisma } from "@/lib/db/prisma";
 
-export type CourseFilters = {
-  name?: string
-  category?: string
-  duration?: number
-}
+type CourseFilters = {
+  name?: string;
+  category?: string;
+  duration?: number;
+  page?: number;
+  limit?: number;
+};
 
 export async function getCourses(filters: CourseFilters = {}) {
-  return prisma.course.findMany({
+  const page = filters.page ?? 1;
+  const limit = filters.limit ?? 8;
+
+  const courses = await prisma.course.findMany({
     where: {
       ...(filters.name && {
-        name: {
+        title: {
           contains: filters.name,
-          mode: "insensitive",
         },
       }),
 
@@ -21,11 +25,35 @@ export async function getCourses(filters: CourseFilters = {}) {
       }),
 
       ...(filters.duration && {
-        duration: filters.duration,
+        durationDays: filters.duration,
       }),
     },
-    orderBy: {
-      createdAt: "desc",
+
+    include: {
+      sessions: {
+        orderBy: { startDate: "asc" },
+      },
     },
-  })
+
+    skip: (page - 1) * limit,
+    take: limit,
+  });
+
+  return courses;
+}
+
+export async function getCoursesCount(filters: CourseFilters = {}) {
+  return prisma.course.count({
+    where: {
+      ...(filters.name && {
+        title: { contains: filters.name },
+      }),
+      ...(filters.category && {
+        category: filters.category,
+      }),
+      ...(filters.duration && {
+        durationDays: filters.duration,
+      }),
+    },
+  });
 }

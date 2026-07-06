@@ -1,37 +1,44 @@
-import { Card, CardHeader, CardTitle, } from "@/components/ui/card"
-
 import EmblaCarousel from "@/components/home/EmblaCarousel";
-import CardCorsi from "@/components/home/CardCorsi";
+import CorsiGrid from "@/components/home/CorsiGrid";
 import CalendarioCorsi from "@/components/home/CalendarioCorsi";
 import Filters from "@/components/home/Filters";
+import CoursesPagination from "@/components/home/Pagination"
 
-export default function Home({
+import { getCourses, getCoursesCount } from "@/lib/queries/courses";
+
+type SearchParams = {
+  name?: string;
+  category?: string;
+  duration?: string;
+  page?: string;
+};
+
+export default async function Home({
   searchParams,
 }: {
-  searchParams: {
-    name?: string
-    category?: string
-    duration?: string
-  }
+  searchParams: Promise<SearchParams>;
 }) {
+  const params = await searchParams;
 
-  const courses = await getCourses()
+  const page = Number(params.page ?? 1);
+  const limit = 8;
 
-  const filtered = courses.filter((c) => {
-    if (searchParams.name &&
-      !c.name.toLowerCase().includes(searchParams.name.toLowerCase())
-    ) return false
+  const [courses, total] = await Promise.all([
+    getCourses({
+      name: params.name,
+      category: params.category,
+      duration: params.duration ? Number(params.duration) : undefined,
+      page,
+      limit,
+    }),
+    getCoursesCount({
+      name: params.name,
+      category: params.category,
+      duration: params.duration ? Number(params.duration) : undefined,
+    }),
+  ]);
 
-    if (searchParams.category &&
-      c.category !== searchParams.category
-    ) return false
-
-    if (searchParams.duration &&
-      c.duration !== Number(searchParams.duration)
-    ) return false
-
-    return true
-  })
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <div className="pt-24">
@@ -40,41 +47,30 @@ export default function Home({
           <EmblaCarousel />
         </section>
 
-        {/* CORSI */}
         <section id="corsi" className="flex flex-col items-center w-full my-10">
+          <div className="w-[60%]">
+            <h2 className="text-xl font-bold">
+              I NOSTRI <span className="text-primary">CORSI</span>
+            </h2>
 
-          <div className="flex justify-center w-full my-15">
-            <div className="w-[80%]">
-              <h2 className="text-xl font-bold">
-                I NOSTRI <span className="text-primary">CORSI</span>
-              </h2>
-              <div className="flex justify-center my-10">
-                <div className="pt-24">
-                  <Filters />
-
-                  <div className="grid grid-cols-3 gap-4 mt-6">
-                    {filtered.map((course) => (
-                      <div key={course.id}>{course.name}</div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-4 gap-4">
-                <CardCorsi />
-                <CardCorsi />
-                <CardCorsi />
-                <CardCorsi />
-                <CardCorsi />
-                <CardCorsi />
-                <CardCorsi />
-                <CardCorsi />
-              </div>
+            <div className="my-10">
+              <Filters />
             </div>
+
+            {courses.length === 0 ? (
+              <div className="py-16 text-center text-muted-foreground">
+                Nessun corso trovato.
+              </div>
+            ) : (
+              <CorsiGrid courses={courses} />
+            )}
+            <CoursesPagination
+              totalPages={totalPages}
+              currentPage={page}
+            />
           </div>
         </section>
 
-        {/* calendario */}
         <section id="calendario" className="my-20">
           <CalendarioCorsi />
         </section>
