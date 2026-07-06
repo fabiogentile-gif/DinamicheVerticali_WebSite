@@ -99,7 +99,7 @@ export default function NavBar() {
 
         <span
           className={`
-            absolute left-0 -bottom-1 h-[2px] bg-primary
+            absolute left-0 -bottom-1 h-0.5 bg-primary
             transition-all duration-300
             ${isActive ? "w-full" : "w-0"}
           `}
@@ -145,7 +145,7 @@ export default function NavBar() {
             <NavigationMenuLink asChild>
               <Link
                 href="/"
-                className="rounded-sm bg-primary px-4 py-2 text-black transition-colors hover:!bg-[#EA580C]">
+                className="rounded-sm bg-primary px-4 py-2 text-black transition-colors hover:bg-[#EA580C]!">
                 CONTATTACI
               </Link>
             </NavigationMenuLink>

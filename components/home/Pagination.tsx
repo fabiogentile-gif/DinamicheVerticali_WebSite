@@ -24,7 +24,8 @@ export default function CoursesPagination({
   const go = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", String(page));
-    router.push(`?${params.toString()}`);
+
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (

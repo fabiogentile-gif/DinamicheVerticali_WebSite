@@ -5,6 +5,7 @@ import Filters from "@/components/home/Filters";
 import CoursesPagination from "@/components/home/Pagination"
 
 import { getCourses, getCoursesCount } from "@/lib/queries/courses";
+import { prisma } from "@/lib/db/prisma";
 
 type SearchParams = {
   name?: string;
@@ -40,6 +41,18 @@ export default async function Home({
 
   const totalPages = Math.ceil(total / limit);
 
+  const coursesDate = await prisma.course.findMany({
+    include: { sessions: true },
+  });
+
+  const flat = courses.flatMap((c) =>
+    c.sessions.map((s) => ({
+      title: c.title,
+      date: s.startDate.toISOString(),
+    }))
+  );
+
+  
   return (
     <div className="pt-24">
       <main>

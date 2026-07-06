@@ -34,27 +34,27 @@ type CardCorsiProps = {
 
 export default function CardCorsi({ course }: CardCorsiProps) {
   return (
-    <Card className="w-full max-w-sm rounded-2xl overflow-hidden shadow-md">
+    <Card className="w-full max-w-sm h-full flex flex-col rounded-2xl overflow-hidden shadow-md transition hover:shadow-lg">
 
       {/* Header / Logo */}
       <div className="flex justify-center items-center py-6">
         {course.logo ? (
-          <div className="relative h-12 w-32">
+          <div className="relative h-24 w-56">
             <Image
               src={course.logo}
               alt={course.title}
               fill
-              className="object-contain"
+              className="object-contain scale-110"
             />
           </div>
         ) : (
-          <div className="h-12 w-32 bg-muted rounded-md flex items-center justify-center text-sm">
+          <div className="h-24 w-56 bg-muted rounded-md flex items-center justify-center text-sm">
             LOGO
           </div>
         )}
       </div>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 flex-1">
 
         {/* Tags */}
         <div className="flex justify-between">
@@ -96,7 +96,7 @@ export default function CardCorsi({ course }: CardCorsiProps) {
       </CardContent>
 
       {/* Footer */}
-      <CardFooter className="flex justify-between items-center">
+      <CardFooter className="flex justify-between items-center mt-auto">
         <Button variant="link" className="px-0">
           Leggi il corso
         </Button>

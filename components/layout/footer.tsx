@@ -6,7 +6,7 @@ export default function Footer() {
             <div className="flex p-5 justify-around items-center mx-20">
                 <div>
                     <Image
-                        src="/logo/logo-dinamiche-verticali-formazione.svg"
+                        src="/logos/logo-dinamiche-verticali-formazione.svg"
                         width={200}
                         height={200}
                         alt="logo-dinamiche-verticali-formazione" />
@@ -22,21 +22,21 @@ export default function Footer() {
                 <div className="flex gap-6 justify-center">
                     <div className="relative h-16 w-32">
                         <Image
-                            src="/logo/logo-global-wind-organisation.avif"
+                            src="/logos/logo-global-wind-organisation.avif"
                             width={100}
                             height={100}
                             alt="logo-global-wind-organisation" />
                     </div>
                     <div className="relative h-16 w-32">
                         <Image
-                            src="/logo/logo-irata-international.avif"
+                            src="/logos/logo-irata-international.avif"
                             width={100}
                             height={100}
                             alt="logo-global-wind-organisation" />
                     </div>
                     <div className="relative h-16 w-32">
                         <Image
-                            src="/logo/logo-petzl-technical-institute.avif"
+                            src="/logos/logo-petzl-technical-institute.avif"
                             width={100}
                             height={100}
                             alt="logo-petzl-technical-institute" />

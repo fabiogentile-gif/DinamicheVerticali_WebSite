@@ -29,13 +29,13 @@ export default function Carousel() {
       <div className="overflow-hidden" ref={emblaRef}>
         {/* container */}
         <div className="flex">
-          <div className="min-w-full flex justify-center items-center bg-red-300 h-64">
+          <div className="min-w-full flex justify-center items-center bg-red-300 h-120">
             Slide 1
           </div>
-          <div className="min-w-full flex justify-center items-center bg-blue-300 h-64">
+          <div className="min-w-full flex justify-center items-center bg-blue-300 h-120">
             Slide 2
           </div>
-          <div className="min-w-full flex justify-center items-center bg-green-300 h-64">
+          <div className="min-w-full flex justify-center items-center bg-green-300 h-120">
             Slide 3
           </div>
         </div>

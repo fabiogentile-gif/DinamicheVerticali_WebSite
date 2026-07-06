@@ -38,7 +38,7 @@ export default function Filters() {
       query.set("duration", String(duration[0]))
     }
 
-    router.push(`?${query.toString()}`)
+    router.push(`?${query.toString()}`, { scroll: false })
   }
 
   function cleanFilters() {
@@ -46,7 +46,8 @@ export default function Filters() {
     setCategory("")
     setDuration([0])
 
-    router.push("?page=1")
+    router.push("?page=1", { scroll: false })
+
   }
 
 
@@ -54,7 +55,7 @@ export default function Filters() {
     <div className="w-full flex flex-col md:flex-row gap-4 items-end p-4 border rounded-xl bg-white">
 
       {/* Nome */}
-      <div className="flex-[2]">
+      <div className="flex-2">
         <Input
           placeholder="Cerca corso..."
           value={name}
