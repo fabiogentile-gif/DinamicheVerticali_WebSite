@@ -24,19 +24,14 @@ export default function Filters() {
 
   const [name, setName] = useState(params.get("name") ?? "")
   const [category, setCategory] = useState(params.get("category") ?? "")
-  const [duration, setDuration] = useState<number[]>([
-    Number.isFinite(parsed) && parsed > 0 ? parsed : 30,
-  ]);
+  const [duration, setDuration] = useState<number[]>([Number.isFinite(parsed) && parsed > 0 ? parsed : 10,]);
 
   function applyFilters() {
     const query = new URLSearchParams()
 
     if (name) query.set("name", name)
     if (category) query.set("category", category)
-
-    if (duration) {
-      query.set("duration", String(duration[0]))
-    }
+    if (duration) { query.set("duration", String(duration[0]))}
 
     router.push(`?${query.toString()}`, { scroll: false })
   }
@@ -54,7 +49,7 @@ export default function Filters() {
   return (
     <div className="w-full flex flex-col md:flex-row gap-4 items-end p-4 border rounded-xl bg-white">
 
-      {/* Nome */}
+      {/* Ricerca per titolo */}
       <div className="flex-2">
         <Input
           placeholder="Cerca corso..."

@@ -8,12 +8,6 @@ type Course = {
   date: string; // YYYY-MM-DD
 };
 
-const courses: Course[] = [
-  { title: "IRATA L1", date: "2026-07-05" },
-  { title: "IRATA L2", date: "2026-07-12" },
-  { title: "IRATA L3", date: "2026-09-10" },
-];
-
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
 }
@@ -22,10 +16,10 @@ function pad(n: number) {
   return n < 10 ? `0${n}` : `${n}`;
 }
 
-export default function CalendarioCorsi() {
+export default function CalendarioCorsi({ initialCourses, }: { initialCourses: Course[]; }) {
+  const [courses] = useState(initialCourses);
   const today = new Date();
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(true);
+
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
 
@@ -59,25 +53,6 @@ export default function CalendarioCorsi() {
     });
   }, [currentMonth, currentYear]);
 
-
-  // --- FETCH CORSI ---
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const res = await fetch("/api/courses");
-        const data = await res.json();
-        setCourses(data);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    load();
-  }, []);
-
-  if (loading) {
-    return <p className="text-center">Caricamento corsi...</p>;
-  }
 
   return (
     <div>
@@ -124,21 +99,17 @@ export default function CalendarioCorsi() {
               return (
                 <div
                   key={i}
-                  className="h-20 border rounded-md p-1 hover:bg-muted transition"
-                >
-                  <div className="text-sm font-medium">{day}</div>
+                  className={`relative h-20 rounded-md border p-2 transition ${dayCourses.length > 0 ? "border-primary" : "hover:bg-muted"}`}>
+                  {dayCourses.length > 0 && (
+                    <div className="absolute left-0 top-0 h-full w-1 rounded-l-md bg-primary" />
+                  )}
+
+                  <div className="text-sm font-semibold">{day}</div>
 
                   {dayCourses.length > 0 && (
-                    <div className="mt-1 space-y-1">
-                      {dayCourses.map((c, idx) => (
-                        <div
-                          key={idx}
-                          className="text-xs bg-primary text-primary-foreground rounded px-1"
-                        >
-                          {c.title}
-                        </div>
-                      ))}
-                    </div>
+                    <p className="mt-2 text-xs line-clamp-2">
+                      {dayCourses[0].title}
+                    </p>
                   )}
                 </div>
               );
@@ -146,26 +117,48 @@ export default function CalendarioCorsi() {
           </div>
         </Card>
 
-        {/* CORSI PER MESI */}
-        <Card className="p-6 w-[40%]">
-          <h3 className="text-lg font-semibold mb-4">
-            Corsi disponibili
+        {/* SIDE BAR RIEPILOGO CORSI */}
+        <Card className="w-[40%] p-6">
+          <h3 className="text-lg font-semibold">
+            Corsi di{" "}
+            <span className="text-primary">
+              {new Date(currentYear, currentMonth).toLocaleString("it-IT", {
+                month: "long",
+              })}
+            </span>
           </h3>
 
+          <p className="text-sm text-muted-foreground mb-6">
+            {monthCourses.length} {monthCourses.length === 1 ? "corso disponibile" : "corsi disponibili"}
+          </p>
+
           {monthCourses.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
-              Nessun corso in questo mese
-            </p>
+            <div className="flex h-32 items-center justify-center rounded-lg border border-dashed">
+              <p className="text-sm text-muted-foreground">
+                Nessun corso in questo mese
+              </p>
+            </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-3">
               {monthCourses.map((c, i) => (
                 <div
                   key={i}
-                  className="p-2 rounded border hover:bg-muted"
+                  className="flex gap-4 rounded-lg border p-4 transition hover:border-primary hover:bg-primary/5"
                 >
-                  <div className="font-medium">{c.title}</div>
-                  <div className="text-xs text-muted-foreground">
-                    {new Date(c.date).toLocaleDateString("it-IT")}
+                  <div className="w-1 rounded-full bg-primary" />
+
+                  <div className="flex-1">
+                    <p className="text-sm text-muted-foreground">
+                      {new Date(c.date).toLocaleDateString("it-IT", {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                      })}
+                    </p>
+
+                    <h4 className="font-semibold mt-1">
+                      {c.title}
+                    </h4>
                   </div>
                 </div>
               ))}

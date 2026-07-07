@@ -14,11 +14,7 @@ type SearchParams = {
   page?: string;
 };
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<SearchParams>;
-}) {
+export default async function Home({searchParams,}: {searchParams: Promise<SearchParams>;}) {
   const params = await searchParams;
 
   const page = Number(params.page ?? 1);
@@ -41,18 +37,20 @@ export default async function Home({
 
   const totalPages = Math.ceil(total / limit);
 
+
+  // CALENDARIO CORSI, PERMETTE LA "INNER JOIN" E IL RENDERDING 
   const coursesDate = await prisma.course.findMany({
     include: { sessions: true },
   });
 
-  const flat = courses.flatMap((c) =>
+  const calendarCourses = coursesDate.flatMap((c) =>
     c.sessions.map((s) => ({
       title: c.title,
-      date: s.startDate.toISOString(),
+      date: s.startDate.toISOString().split("T")[0],
     }))
   );
 
-  
+
   return (
     <div className="pt-24">
       <main>
@@ -84,8 +82,8 @@ export default async function Home({
           </div>
         </section>
 
-        <section id="calendario" className="my-20">
-          <CalendarioCorsi />
+        <section id="calendario" className="my-20 mx-15">
+          <CalendarioCorsi initialCourses={calendarCourses} />
         </section>
       </main>
     </div>

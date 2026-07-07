@@ -16,10 +16,10 @@ const scrollItems = [
   { id: "calendario", label: "CALENDARIO" },
 ];
 
-const pageItems = [
-  { href: "/blog", label: "BLOG" },
-  { href: "/contatti", label: "CONTATTI" },
-];
+// const pageItems = [
+//   { href: "/blog", label: "BLOG" },
+//   { href: "/contatti", label: "CONTATTI" },
+// ];
 
 export default function NavBar() {
   const [active, setActive] = useState("home");
