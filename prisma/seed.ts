@@ -114,6 +114,7 @@ const coursesData: CourseSeedData[] = [
         featured: false,
         sessions: [
             { startDate: new Date("2026-07-13") },
+            { startDate: new Date("2026-08-31") },
             { startDate: new Date("2026-09-21") },
             { startDate: new Date("2026-10-19") },
         ],
