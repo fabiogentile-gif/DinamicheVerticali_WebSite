@@ -290,7 +290,7 @@ async function main() {
             data: {
                 ...courseData,
                 sessions: { create: sessions },
-            } as any,
+            } ,
         });
     }
 }

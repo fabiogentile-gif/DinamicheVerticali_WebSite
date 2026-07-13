@@ -1,91 +1,102 @@
-import EmblaCarousel from "@/components/home/EmblaCarousel";
-import CorsiGrid from "@/components/home/CorsiGrid";
-import CalendarioCorsi from "@/components/home/CalendarioCorsi";
-import Filters from "@/components/home/Filters";
-import CoursesPagination from "@/components/home/Pagination"
+import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
+import Linkbutton from '@/components/home/Linkbutton';
+import CardCorsi from '@/components/home/CardCorsi';
+import CalendarioCorsi from '@/components/home/CalendarioCorsi';
 
-import { getCourses, getCoursesCount } from "@/lib/queries/courses";
-import { prisma } from "@/lib/db/prisma";
+import { getCourses } from '@/lib/queries/courses';
 
-type SearchParams = {
-  name?: string;
-  category?: string;
-  duration?: string;
-  page?: string;
-};
+const imgHero = 'https://www.figma.com/api/mcp/asset/0e8e8eac-9525-4b73-bff1-1a0d40a34cdb';
 
-export default async function Home({searchParams,}: {searchParams: Promise<SearchParams>;}) {
-  const params = await searchParams;
+const courses = [
+  {
+    name: 'IRATA',
+    description: 'Industrial Rope Access Trade Association',
+    logo: '/logos/logo-irata-international.avif',
+  },
+  {
+    name: 'GWO',
+    description: 'Global Wind Organisation',
+    logo: '/logos/logo-global-wind-organisation.avif',
+  },
+  {
+    name: 'PETZL',
+    description: 'Petzl Technical Institute',
+    logo: '/logos/logo-petzl-technical-institute.avif',
+  },
+  {
+    name: 'ALTRI',
+    description: 'Scopri l’offerta completa',
+    logo: '/logos/logo-dinamiche-verticali-formazione.svg',
+  },
+];
 
-  const page = Number(params.page ?? 1);
-  const limit = 8;
-
-  const [courses, total] = await Promise.all([
-    getCourses({
-      name: params.name,
-      category: params.category,
-      duration: params.duration ? Number(params.duration) : undefined,
-      page,
-      limit,
-    }),
-    getCoursesCount({
-      name: params.name,
-      category: params.category,
-      duration: params.duration ? Number(params.duration) : undefined,
-    }),
-  ]);
-
-  const totalPages = Math.ceil(total / limit);
-
-
-  // CALENDARIO CORSI, PERMETTE LA "INNER JOIN" E IL RENDERDING 
-  const coursesDate = await prisma.course.findMany({
-    include: { sessions: true },
-  });
-
-  const calendarCourses = coursesDate.flatMap((c) =>
-    c.sessions.map((s) => ({
-      title: c.title,
-      date: s.startDate.toISOString().split("T")[0],
-    }))
-  );
-
+export default async function Home() {
+  const courses = await getCourses();
 
   return (
-    <div className="pt-24">
-      <main>
-        <section id="home">
-          <EmblaCarousel />
-        </section>
-
-        <section id="corsi" className="flex flex-col items-center w-full my-10">
-          <div className="w-[60%]">
-            <h2 className="text-xl font-bold">
-              I NOSTRI <span className="text-primary">CORSI</span>
-            </h2>
-
-            <div className="my-10">
-              <Filters />
+    <main id="home" className="bg-white text-[#1e1e1c]">
+      <section className="relative isolate overflow-hidden">
+        <Image
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          src={imgHero}
+          width={1600}
+          height={900}
+          priority
+        />
+        <div className="absolute inset-0 bg-white/40" />
+        <div className="relative mx-auto flex min-h-185 max-w-7xl flex-col justify-center gap-8 px-6 py-24 lg:px-20">
+          <div className="max-w-120 space-y-5">
+            <div className="font-manrope space-y-2 text-[64px] leading-[0.95] font-bold tracking-[-0.03em] uppercase">
+              <p className="text-[#1e1e1c]">Formazione certificata</p>
+              <p className="text-primary">per lavori in quota</p>
             </div>
-
-            {courses.length === 0 ? (
-              <div className="py-16 text-center text-muted-foreground">
-                Nessun corso trovato.
-              </div>
-            ) : (
-              <CorsiGrid courses={courses} />
-            )}
-            <CoursesPagination
-              totalPages={totalPages}
-              currentPage={page}
-            />
+            <p className="max-w-105 text-lg text-[#0c0b0b]">
+              Corsi professionali e certificazioni per operare in sicurezza in quota e su fune.
+            </p>
           </div>
-        </section>
 
-        <section id="calendario" className="my-20 mx-15">
-          <CalendarioCorsi initialCourses={calendarCourses} />
-        </section>
-      </main>
-    </div>
+          {/* pulsanti hero */}
+          <div className="flex flex-wrap gap-4">
+            <Linkbutton title="Scopri i corsi" bg path="#corsi" />
+            <Linkbutton title="Contattaci" path="#contatti" />
+          </div>
+        </div>
+      </section>
+
+      <section id="chi-siamo" className="bg-primary px-6 py-12 text-center text-white">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4">
+          <p className="font-manrope text-[28px] font-normal uppercase">Serve aiuto?</p>
+          <p className="font-manrope text-4xl font-bold uppercase">
+            Ti aiutiamo a trovare il corso giusto!
+          </p>
+          <Linkbutton title="Contattaci" path="#contatti" />
+        </div>
+      </section>
+
+      <section id="corsi" className="bg-white px-6 py-20 sm:px-8 lg:px-10">
+        {/* DESCRIZIONE CORSI */}
+        <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
+          <div className="flex flex-col items-center gap-3">
+            <p className="font-barlow text-primary text-[28px] leading-none font-semibold uppercase">
+              I nostri corsi
+            </p>
+            <h2 className="font-barlow font-bolf text-4xl leading-none font-bold text-[#1e1e1c] uppercase">
+              Scegli la certificazione di cui hai bisogno
+            </h2>
+            <p className="max-w-2xl text-base text-[#1e1e1c]">
+              Esplora le principali certificazioni per cui forniamo formazione.
+            </p>
+          </div>
+
+          {/* CARD CORSI */}
+          <CardCorsi />
+        </div>
+      </section>
+      <section>
+        <CalendarioCorsi courses={courses} />
+      </section>
+    </main>
   );
 }

@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Barlow_Condensed, Manrope } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 
-const montserrat = Montserrat({
-  weight: '400',
-  subsets: ['latin'],
-})
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const barlowCondensed = Barlow_Condensed({
+  subsets: ["latin"],
+  variable: "--font-barlow-condensed",
+  weight: ["400", "500", "600", "700"],
+});
 
 
 export const metadata: Metadata = {
@@ -21,15 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={montserrat.className}
-    >
-      <body>
-        <NavBar/>
+    <html lang="en" className={`${manrope.variable} ${barlowCondensed.variable}`}>
+      <body className="min-h-screen bg-background font-sans text-foreground">
+        <NavBar />
         {children}
-        <Footer/>
-        </body>
+        <Footer />
+      </body>
     </html>
   );
 }

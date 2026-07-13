@@ -11,9 +11,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-barlow-condensed);
 
   --color-border: var(--border);
   --color-ring: var(--ring);
@@ -71,7 +71,10 @@
    GLOBAL VARIABLES
 ========================= */
 :root {
-  --background: oklch(1 0 0);
+  --font-manrope: "Manrope", sans-serif;
+  --font-barlow-condensed: "Barlow Condensed", sans-serif;
+
+  --background: #fff;
   --foreground: oklch(0.145 0 0);
 
   --card: oklch(1 0 0);
@@ -94,7 +97,7 @@
 
   --destructive: oklch(0.577 0.245 27.325);
 
-  --border: oklch(0.922 0 0);
+  --border: #aaa;
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
 
@@ -110,7 +113,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   /* 🔥 TUO COLORE BASE */
-  --burning-orange-500: #ff7433;
+  --burning-orange-500: #FF6316;
 }
 
 /* =========================
@@ -164,9 +167,42 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-manrope), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-barlow-condensed), sans-serif;
+  }
+
+  .font-manrope {
+    font-family: var(--font-manrope), sans-serif;
+  }
+
+  .font-barlow {
+    font-family: var(--font-barlow-condensed), sans-serif;
   }
 
   html {
     @apply font-sans;
+  }
+
+}
+
+@layer utilities {
+  .clipped-bottom-left {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 12px 100%, 0 calc(100% - 12px))
+  }
+
+  .clipped-top-right {
+    clip-path: polygon(0 0,
+        calc(100% - 12px) 0,
+        100% 12px,
+        100% 100%,
+        0 100%);
   }
 }
