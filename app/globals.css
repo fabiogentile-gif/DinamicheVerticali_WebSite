@@ -71,9 +71,6 @@
    GLOBAL VARIABLES
 ========================= */
 :root {
-  --font-manrope: "Manrope", sans-serif;
-  --font-barlow-condensed: "Barlow Condensed", sans-serif;
-
   --background: #fff;
   --foreground: oklch(0.145 0 0);
 
@@ -165,31 +162,10 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-manrope), sans-serif;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-barlow-condensed), sans-serif;
-  }
-
   .font-manrope {
     font-family: var(--font-manrope), sans-serif;
   }
 
-  .font-barlow {
-    font-family: var(--font-barlow-condensed), sans-serif;
-  }
-
-  html {
-    @apply font-sans;
-  }
 
 }
 

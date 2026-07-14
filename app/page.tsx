@@ -1,35 +1,58 @@
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
 import Linkbutton from '@/components/home/Linkbutton';
 import CardCorsi from '@/components/home/CardCorsi';
 import CalendarioCorsi from '@/components/home/CalendarioCorsi';
 
 import { getCourses } from '@/lib/queries/courses';
 
-const imgHero = 'https://www.figma.com/api/mcp/asset/0e8e8eac-9525-4b73-bff1-1a0d40a34cdb';
+import { BadgeCheck, CalendarDays, HardHat, ShieldCheck } from 'lucide-react';
+import FeatureBar from '@/components/layout/FeatureBar';
+import FAQ from '@/components/home/FAQ';
 
-const courses = [
+const features = [
   {
-    name: 'IRATA',
-    description: 'Industrial Rope Access Trade Association',
-    logo: '/logos/logo-irata-international.avif',
+    icon: BadgeCheck,
+    title: (
+      <>
+        CERTIFICAZIONI
+        <br />
+        RICONOSCIUTE
+      </>
+    ),
   },
   {
-    name: 'GWO',
-    description: 'Global Wind Organisation',
-    logo: '/logos/logo-global-wind-organisation.avif',
+    icon: ShieldCheck,
+    title: (
+      <>
+        ISTRUTTORI
+        <br />
+        QUALIFICATI
+      </>
+    ),
   },
   {
-    name: 'PETZL',
-    description: 'Petzl Technical Institute',
-    logo: '/logos/logo-petzl-technical-institute.avif',
+    icon: HardHat,
+    title: (
+      <>
+        FORMAZIONE
+        <br />
+        PRATICA
+      </>
+    ),
   },
   {
-    name: 'ALTRI',
-    description: 'Scopri l’offerta completa',
-    logo: '/logos/logo-dinamiche-verticali-formazione.svg',
+    icon: CalendarDays,
+    title: (
+      <>
+        DATE FLESSIBILI
+        <br />
+        TUTTO L’ANNO
+      </>
+    ),
   },
 ];
+
+const imgHero = 'https://www.figma.com/api/mcp/asset/0e8e8eac-9525-4b73-bff1-1a0d40a34cdb';
 
 export default async function Home() {
   const courses = await getCourses();
@@ -79,10 +102,10 @@ export default async function Home() {
         {/* DESCRIZIONE CORSI */}
         <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
           <div className="flex flex-col items-center gap-3">
-            <p className="font-barlow text-primary text-[28px] leading-none font-semibold uppercase">
+            <p className="text-primary text-[28px] leading-none font-semibold uppercase">
               I nostri corsi
             </p>
-            <h2 className="font-barlow font-bolf text-4xl leading-none font-bold text-[#1e1e1c] uppercase">
+            <h2 className="font-bolf text-4xl leading-none font-bold text-[#1e1e1c] uppercase">
               Scegli la certificazione di cui hai bisogno
             </h2>
             <p className="max-w-2xl text-base text-[#1e1e1c]">
@@ -97,6 +120,10 @@ export default async function Home() {
       <section>
         <CalendarioCorsi courses={courses} />
       </section>
+
+      <FAQ />
+
+      <FeatureBar />
     </main>
   );
 }

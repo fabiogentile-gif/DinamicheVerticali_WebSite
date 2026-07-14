@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Manrope } from "next/font/google";
+import { Manrope, Barlow_Condensed } from "next/font/google";
+
 import "./globals.css";
 import NavBar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+
+
+
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -10,12 +14,11 @@ const manrope = Manrope({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const barlowCondensed = Barlow_Condensed({
+const barlow = Barlow_Condensed({
   subsets: ["latin"],
   variable: "--font-barlow-condensed",
   weight: ["400", "500", "600", "700"],
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${barlowCondensed.variable}`}>
-      <body className="min-h-screen bg-background font-sans text-foreground">
+    <html lang="it" className={`${manrope.variable} ${barlow.variable}`}>
+      <body className={`${manrope.className} min-h-screen bg-background text-foreground`}>
         <NavBar />
         {children}
         <Footer />
