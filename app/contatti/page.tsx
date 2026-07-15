@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { profileImage, contactItems, partnerHotels, recentPlaces } from '@/data/contatti';
 
 import HotelSection from '@/components/contatti/HotelSection';
+import TeamCard from '@/components/ui/TeamCard';
 
 const partnerLogos = [
   { src: '/logos/logo-petzl-technical-institute.avif', alt: 'Petzl Technical Institute' },
@@ -17,56 +18,8 @@ export default function ContattiPage() {
       <section className="bg-[#f7f7f7] px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
         <div className="mx-auto flex max-w-7xl justify-center">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-stretch lg:gap-10">
-            {/* CARD PERSONALE */}
-            <div className="relative lg:w-[320px] lg:shrink-0">
-              {/* Definizione del clipPath */}
-              <svg width="0" height="0" className="absolute">
-                <defs>
-                  <clipPath id="teamCardClip" clipPathUnits="objectBoundingBox">
-                    <path d="M0.003125 0.001923 H0.90625 L0.996875 0.057692 V0.998077 H0.09375 L0.003125 0.942308 V0.001923 Z" />
-                  </clipPath>
-                </defs>
-              </svg>
-
-              {/* Bordo */}
-              <svg
-                className="pointer-events-none absolute inset-0 h-full w-full"
-                viewBox="0 0 320 520"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M1 1 H290 L319 30 V519 H30 L1 490 V1 Z"
-                  fill="none"
-                  stroke="#aaaaaa"
-                  strokeWidth="2"
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-
-              {/* Contenuto */}
-              <div className="relative z-10 bg-white" style={{ clipPath: 'url(#teamCardClip)' }}>
-                <div className="border-b border-[#aaaaaa] p-6">
-                  <h2
-                    className="text-[26px] font-bold uppercase text-[#ff6316]"
-                    style={{ fontFamily: 'var(--font-barlow-condensed)' }}
-                  >
-                    Valentina
-                  </h2>
-
-                  <p className="mt-1 font-semibold">Coordinatrice logistica</p>
-
-                  <p className="mt-1 text-[#555]">Lingue: IT - EN</p>
-                </div>
-
-                <Image
-                  src={profileImage}
-                  alt="Valentina"
-                  width={320}
-                  height={420}
-                  className="h-[420px] w-full object-cover"
-                />
-              </div>
-            </div>
+            {/* Immagine profilo */}
+            <TeamCard name="Valentina" role="Coordinatrice logistica" languages="IT - EN" image={profileImage} />
 
             {/* Elenco informazioni (allineato a sinistra) */}
             <div className="flex flex-col justify-center gap-12">

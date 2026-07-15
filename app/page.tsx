@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Linkbutton from '@/components/home/Linkbutton';
+import LinkButton from '@/components/ui/Linkbutton';
 import CardCorsi from '@/components/home/CardCorsi';
 import CalendarioCorsi from '@/components/home/CalendarioCorsi';
 
@@ -38,8 +38,7 @@ export default async function Home() {
 
           {/* pulsanti hero */}
           <div className="flex flex-wrap gap-4">
-            <Linkbutton title="Scopri i corsi" bg path="#corsi" />
-            <Linkbutton title="Contattaci" path="#contatti" />
+            <LinkButton title="Scopri i corsi" href="/corsi" bg />
           </div>
         </div>
       </section>
@@ -48,7 +47,7 @@ export default async function Home() {
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-4">
           <p className="font-manrope text-[28px] font-normal uppercase">Serve aiuto?</p>
           <p className="font-manrope text-4xl font-bold uppercase">Ti aiutiamo a trovare il corso giusto!</p>
-          <Linkbutton title="Contattaci" path="#contatti" />
+          <LinkButton title="Contattaci" href="/contatti" arrow />
         </div>
       </section>
 

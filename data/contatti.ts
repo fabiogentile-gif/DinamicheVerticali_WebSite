@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 
-export const profileImage = 'https://www.figma.com/api/mcp/asset/b521092c-0154-433c-8d73-6872654b5cfe';
+export const profileImage = '/dipendenti/Valentina.png';
 export const hotelOneImage = 'https://www.figma.com/api/mcp/asset/323961fd-1817-459c-8212-7ec90be896d6';
 export const hotelTwoImage = 'https://www.figma.com/api/mcp/asset/00833d4c-3967-4082-8157-69bacde26dfc';
 

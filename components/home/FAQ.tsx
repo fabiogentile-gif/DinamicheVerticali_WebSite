@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Phone, Plus, Minus, ArrowUpRight } from 'lucide-react';
+import LinkButton from '@/components/ui/Linkbutton';
 
 const faqItems = [
   {
@@ -108,13 +109,9 @@ export default function FAQ() {
 
             <p className="mt-5 text-sm text-gray-600">Per qualsiasi dubbio, noi siamo a disposizione!</p>
 
-            <a
-              href="/contatti"
-              className="mt-6 inline-flex items-center gap-2 bg-orange-500 px-5 py-3 text-sm font-bold text-white"
-            >
-              CONTATTACI
-              <ArrowUpRight size={16} />
-            </a>
+            <div className="mt-6">
+              <LinkButton title="Contattaci" href="/contatti" bg arrow />
+            </div>
           </div>
         </aside>
       </div>
