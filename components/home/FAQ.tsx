@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Phone, Plus, Minus, ArrowUpRight } from 'lucide-react';
+import { Phone, Plus, Minus } from 'lucide-react';
 import LinkButton from '@/components/ui/Linkbutton';
 
 const faqItems = [
@@ -54,7 +54,7 @@ export default function FAQ() {
                   onClick={() => setOpenIndex(open ? null : index)}
                   className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left font-bold"
                 >
-                  <span className="break-words">{item.question}</span>
+                  <span className="wrap-break-word">{item.question}</span>
 
                   {open ? (
                     <Minus className="shrink-0 text-orange-500" size={22} />
@@ -79,7 +79,7 @@ export default function FAQ() {
           })}
         </div>
 
-        <aside className="group relative h-fit w-full max-w-[260px] overflow-hidden">
+        <aside className="group relative h-fit w-full max-w-65 overflow-hidden">
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 260 300" preserveAspectRatio="none">
             <path
               d="M1 1 H230 L259 30 V299 H30 L1 270 V1"

@@ -113,9 +113,9 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-[1500px] px-4">
+    <section className="mx-auto w-full max-w-375 px-4">
       <div className="mb-8 text-center">
-        <p className="font-condensed text-xl font-bold uppercase text-[#ff6422]">Calendario</p>
+        <h3 className="font-condensed text-xl font-bold uppercase text-[#ff6422]">Calendario</h3>
 
         <h2 className="font-condensed mt-2 text-4xl font-black uppercase">Scopri le prossime date dei corsi</h2>
       </div>
@@ -244,7 +244,7 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
         </div>
 
         <aside
-          className={`h-[570px] overflow-hidden border bg-white transition-all duration-500 ${
+          className={`h-142.5 overflow-hidden border bg-white transition-all duration-500 ${
             showSidebar ? 'w-[30%]' : 'w-0 translate-x-full opacity-0'
           }`}
         >
@@ -262,7 +262,7 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
               <p className="mt-2 text-sm text-gray-500">{monthCourses.length} corsi disponibili</p>
             </div>
 
-            <div className="h-[470px] space-y-3 overflow-y-auto p-5">
+            <div className="h-117.5 space-y-3 overflow-y-auto p-5">
               {monthCourses.map((course) => (
                 <div key={course.id} className="border p-4 transition hover:border-[#ff6422]">
                   <h4 className="text-sm font-black uppercase">{course.title}</h4>

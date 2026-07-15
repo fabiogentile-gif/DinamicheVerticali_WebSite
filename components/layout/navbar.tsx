@@ -44,7 +44,7 @@ export default function NavBar() {
               {item.label}
 
               {isActive && (
-                <span className="absolute -bottom-2 left-0 h-[3px] w-full bg-[#ff6316]" />
+                <span className="absolute -bottom-2 left-0 h-0.75 w-full bg-[#ff6316]" />
               )}
             </Link>
           );

@@ -56,7 +56,7 @@ export default function ContattiPage() {
             </div>
 
             {/* Loghi partner (centrati) */}
-            <div className="flex flex-col items-center justify-center gap-12 lg:w-[180px] lg:shrink-0">
+            <div className="flex flex-col items-center justify-center gap-12 lg:w-45 lg:shrink-0">
               {partnerLogos.map((logo) => (
                 <Image
                   key={logo.alt}

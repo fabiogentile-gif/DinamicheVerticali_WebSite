@@ -28,7 +28,7 @@ export default function CardCorsi() {
   return (
     <div className="mt-12 flex flex-wrap justify-center gap-8">
       {courses.map((course) => (
-        <div key={course.name} className="group relative flex min-h-[280px] w-[240px] flex-col overflow-hidden">
+        <div key={course.name} className="group relative flex min-h-70 w-60 flex-col overflow-hidden">
           {/* Forma con sfondo e bordo */}
 
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 240 280">
@@ -57,7 +57,7 @@ export default function CardCorsi() {
       items-center gap-4 p-6 text-center
     "
           >
-            <div className="flex h-[100px] w-full items-center justify-center">
+            <div className="flex h-25 w-full items-center justify-center">
               <Image
                 src={course.logo}
                 alt={course.name}
@@ -67,7 +67,7 @@ export default function CardCorsi() {
               />
             </div>
 
-            <h3 className="text-3xl uppercase leading-none text-foreground">{course.name}</h3>
+            <h3 className="text-3xl uppercase font-bold font-heading leading-none text-foreground">{course.name}</h3>
 
             <p className="text-muted-foreground">{course.description}</p>
 

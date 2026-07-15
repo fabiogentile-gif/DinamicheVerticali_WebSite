@@ -17,8 +17,8 @@ type HotelCardProps = {
 
 export default function HotelCard({ hotel }: HotelCardProps) {
   return (
-    <article className="flex h-[480px] flex-col overflow-hidden rounded-xs border border-[#aaaaaa] bg-[#f7f7f7]">
-      <div className="relative h-[220px] shrink-0 overflow-hidden">
+    <article className="flex h-120 flex-col overflow-hidden rounded-xs border border-[#aaaaaa] bg-[#f7f7f7]">
+      <div className="relative h-55 shrink-0 overflow-hidden">
         <Image src={hotel.image} alt={hotel.name} fill className="object-cover object-center" />
       </div>
 

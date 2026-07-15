@@ -28,8 +28,8 @@ export default async function Home() {
         <div className="relative mx-auto flex min-h-185 max-w-7xl flex-col justify-center gap-8 px-6 py-24 lg:px-20">
           <div className="max-w-120 space-y-5">
             <div className="font-manrope space-y-2 text-[64px] leading-[0.95] font-bold tracking-[-0.03em] uppercase">
-              <p className="text-[#1e1e1c]">Formazione certificata</p>
-              <p className="text-primary">per lavori in quota</p>
+              <h3 className="text-[#1e1e1c]">Formazione certificata</h3>
+              <h3 className="text-primary">per lavori in quota</h3>
             </div>
             <p className="max-w-105 text-lg text-[#0c0b0b]">
               Corsi professionali e certificazioni per operare in sicurezza in quota e su fune.
@@ -45,8 +45,8 @@ export default async function Home() {
 
       <section id="chi-siamo" className="bg-primary px-6 py-12 text-center text-white">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-4">
-          <p className="font-manrope text-[28px] font-normal uppercase">Serve aiuto?</p>
-          <p className="font-manrope text-4xl font-bold uppercase">Ti aiutiamo a trovare il corso giusto!</p>
+          <h3 className="text-[28px] font-normal uppercase">Serve aiuto?</h3>
+          <h3 className="text-4xl font-bold uppercase">Ti aiutiamo a trovare il corso giusto!</h3>
           <LinkButton title="Contattaci" href="/contatti" arrow />
         </div>
       </section>
@@ -55,7 +55,7 @@ export default async function Home() {
         {/* DESCRIZIONE CORSI */}
         <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
           <div className="flex flex-col items-center gap-3">
-            <p className="text-primary text-[28px] leading-none font-semibold uppercase">I nostri corsi</p>
+            <h3 className="text-primary text-[28px] leading-none font-semibold uppercase font-heading">I nostri corsi</h3>
             <h2 className="font-bolf text-4xl leading-none font-bold text-[#1e1e1c] uppercase">
               Scegli la certificazione di cui hai bisogno
             </h2>

@@ -33,7 +33,7 @@ export default function TeamCard({ name, role, languages, image }: TeamCardProps
           <p className="mt-1 text-[#555]">Lingue: {languages}</p>
         </div>
 
-        <Image src={image} alt={name} width={320} height={420} className="h-[420px] w-full object-cover" />
+        <Image src={image} alt={name} width={320} height={420} className="h-105 w-full object-cover" />
       </div>
     </div>
   );
