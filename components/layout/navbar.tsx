@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { href: "/", label: "HOME" },
   { href: "/corsi", label: "CORSI" },
+  { href: "/blog", label: "BLOG" },
   { href: "/chi-siamo", label: "CHI SIAMO" },
   { href: "/contatti", label: "CONTATTI" },
 ];
@@ -48,13 +49,6 @@ export default function NavBar() {
             </Link>
           );
         })}
-
-        <Link
-          href="/contatti"
-          className="rounded-sm bg-[#ff6316] px-4 py-2 text-white transition hover:opacity-90"
-        >
-          CONTATTACI
-        </Link>
       </div>
     </nav>
   );

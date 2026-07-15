@@ -5,52 +5,8 @@ import CalendarioCorsi from '@/components/home/CalendarioCorsi';
 
 import { getCourses } from '@/lib/queries/courses';
 
-import { BadgeCheck, CalendarDays, HardHat, ShieldCheck } from 'lucide-react';
 import FeatureBar from '@/components/layout/FeatureBar';
 import FAQ from '@/components/home/FAQ';
-
-const features = [
-  {
-    icon: BadgeCheck,
-    title: (
-      <>
-        CERTIFICAZIONI
-        <br />
-        RICONOSCIUTE
-      </>
-    ),
-  },
-  {
-    icon: ShieldCheck,
-    title: (
-      <>
-        ISTRUTTORI
-        <br />
-        QUALIFICATI
-      </>
-    ),
-  },
-  {
-    icon: HardHat,
-    title: (
-      <>
-        FORMAZIONE
-        <br />
-        PRATICA
-      </>
-    ),
-  },
-  {
-    icon: CalendarDays,
-    title: (
-      <>
-        DATE FLESSIBILI
-        <br />
-        TUTTO L’ANNO
-      </>
-    ),
-  },
-];
 
 const imgHero = 'https://www.figma.com/api/mcp/asset/0e8e8eac-9525-4b73-bff1-1a0d40a34cdb';
 
@@ -91,9 +47,7 @@ export default async function Home() {
       <section id="chi-siamo" className="bg-primary px-6 py-12 text-center text-white">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-4">
           <p className="font-manrope text-[28px] font-normal uppercase">Serve aiuto?</p>
-          <p className="font-manrope text-4xl font-bold uppercase">
-            Ti aiutiamo a trovare il corso giusto!
-          </p>
+          <p className="font-manrope text-4xl font-bold uppercase">Ti aiutiamo a trovare il corso giusto!</p>
           <Linkbutton title="Contattaci" path="#contatti" />
         </div>
       </section>
@@ -102,9 +56,7 @@ export default async function Home() {
         {/* DESCRIZIONE CORSI */}
         <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
           <div className="flex flex-col items-center gap-3">
-            <p className="text-primary text-[28px] leading-none font-semibold uppercase">
-              I nostri corsi
-            </p>
+            <p className="text-primary text-[28px] leading-none font-semibold uppercase">I nostri corsi</p>
             <h2 className="font-bolf text-4xl leading-none font-bold text-[#1e1e1c] uppercase">
               Scegli la certificazione di cui hai bisogno
             </h2>
