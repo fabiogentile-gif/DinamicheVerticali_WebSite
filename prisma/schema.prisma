@@ -13,39 +13,61 @@ datasource db {
 }
 
 model Course {
-  id           String   @id @default(cuid())
-  title        String
-  description  String?
-
-  logo         String?
-  tag          String
-  month        String?          // reso opzionale, alcuni corsi non hanno un mese fisso
-
-  bannerImage  String?
+  id                  String    @id @default(cuid())
+  title               String
+  description         String?
+  category            String
+  location            String?
+  durationDays        Int?
+  examDays            Int?
+  time                DateTime?
+  price               Int?
   certificateDuration Int?
-  price        Int?
 
-  category     String
+  sessions  CourseSession[]
+  employees Employee[]
 
-  durationDays Int?
-  durationHours Int?
-  examDays     Int?
-
-  featured     Boolean @default(false)
-
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  sessions     CourseSession[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model CourseSession {
-  id        String   @id @default(cuid())
+  id String @id @default(cuid())
+
   startDate DateTime
   endDate   DateTime?
 
-  courseId  String
-  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
+}
+
+model Employee {
+  id String @id @default(cuid())
+
+  name    String
+  surname String
+  image   String
+
+  languages Language[]
+  roles     Role[]
+
+  courses Course[]
+
+  createdAt DateTime @default(now())
+}
+
+model Language {
+  id   String @id @default(cuid())
+  name String
+
+  employees Employee[]
+}
+
+model Role {
+  id   String @id @default(cuid())
+  name String
+
+  employees Employee[]
 }

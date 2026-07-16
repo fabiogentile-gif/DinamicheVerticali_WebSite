@@ -5,8 +5,10 @@ import CalendarioCorsi from '@/components/home/CalendarioCorsi';
 
 import { getCourses } from '@/lib/queries/courses';
 
-import FeatureBar from '@/components/layout/FeatureBar';
+import FeatureBar from '@/components/ui/FeatureBar';
 import FAQ from '@/components/home/FAQ';
+import { Ban } from 'lucide-react';
+import Banner from '@/components/ui/Banner';
 
 const imgHero = 'https://www.figma.com/api/mcp/asset/0e8e8eac-9525-4b73-bff1-1a0d40a34cdb';
 
@@ -43,19 +45,20 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="chi-siamo" className="bg-primary px-6 py-12 text-center text-white">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4">
-          <h3 className="text-[28px] font-normal uppercase">Serve aiuto?</h3>
-          <h3 className="text-4xl font-bold uppercase">Ti aiutiamo a trovare il corso giusto!</h3>
-          <LinkButton title="Contattaci" href="/contatti" arrow />
-        </div>
-      </section>
+      <Banner
+        subtitle="Serve aiuto?"
+        title="Ti aiutiamo a trovare il corso giusto!"
+        buttonText="Contattaci"
+        buttonHref="/contatti"
+      />
 
       <section id="corsi" className="bg-white px-6 py-20 sm:px-8 lg:px-10">
         {/* DESCRIZIONE CORSI */}
         <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
           <div className="flex flex-col items-center gap-3">
-            <h3 className="text-primary text-[28px] leading-none font-semibold uppercase font-heading">I nostri corsi</h3>
+            <h3 className="text-primary text-[28px] leading-none font-semibold uppercase font-heading">
+              I nostri corsi
+            </h3>
             <h2 className="font-bolf text-4xl leading-none font-bold text-[#1e1e1c] uppercase">
               Scegli la certificazione di cui hai bisogno
             </h2>

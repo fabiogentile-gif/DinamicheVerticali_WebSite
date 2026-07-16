@@ -1,0 +1,58 @@
+export const mockCourse = {
+  id: '1',
+  title: 'IRATA',
+  description: 'Percorso di certificazione internazionale per lavori su fune.',
+  logo: '/images/courses/irata-logo.png',
+  tag: 'IRATA',
+  bannerImage: '/logos/logo-irata-international.avif',
+  price: 1000,
+  category: 'IRATA',
+  durationDays: 4,
+  durationHours: 32,
+  examDays: 1,
+  levels: ['Livello 1', 'Livello 2', 'Livello 3'],
+  sessions: [
+    {
+      id: '1',
+      startDate: new Date('2026-10-16'),
+      endDate: new Date('2026-10-21'),
+    },
+    {
+      id: '2',
+      startDate: new Date('2026-11-09'),
+      endDate: new Date('2026-11-14'),
+    },
+  ],
+  detail: {
+    location: 'Via G. B. Feroggio 54, Torino',
+    schedule: '9:00 - 17:30',
+    certificate: 'Validità 3 anni',
+    requirements: 'Maggiore età, buono stato di salute',
+    description: "Percorso di certificazione internazionale per l'accesso e il lavoro in sicurezza su doppia fune.",
+    target: [
+      'Lavoratori che vogliono operare su fune',
+      'Aziende che vogliono ampliare i servizi',
+      'Tecnici che devono rinnovare la certificazione',
+    ],
+    videoUrl: 'https://youtube.com/example',
+    videoThumbnail: '/images/courses/irata-video.jpg',
+  },
+  teachers: [
+    {
+      id: '1',
+      image: '/dipendenti/Franco-Bignami.png',
+      name: 'Franco Bignami',
+      role: 'Formatore IRATA Livello 3',
+      description: '15 anni di esperienza nei lavori in quota',
+      languages: 'Italiano, Inglese',
+    },
+    {
+      id: '2',
+      image: '/dipendenti/Diego-Maltenti.png',
+      name: 'Diego Maltenti',
+      role: 'Istruttore GWO',
+      description: 'Specializzato nella formazione eolica',
+      languages: 'Italiano, Inglese',
+    },
+  ],
+};
