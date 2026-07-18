@@ -265,11 +265,9 @@ async function main() {
         name: employee.name,
         surname: employee.surname,
         image: employee.image,
-
         languages: {
           connect: languages.filter((lang) => employee.languages.includes(lang.name)).map((lang) => ({ id: lang.id })),
         },
-
         roles: {
           connect: roles.filter((role) => employee.roles.includes(role.name)).map((role) => ({ id: role.id })),
         },
@@ -289,14 +287,15 @@ async function main() {
       },
     });
   }
-
-  main()
-    .then(async () => {
-      await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-      console.error(e);
-      await prisma.$disconnect();
-      process.exit(1);
-    });
 }
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+    console.log("Seed completato");
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

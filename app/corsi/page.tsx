@@ -1,16 +1,18 @@
-
-
 import Breadcrumb from '@/components/ui/BreadCrumb';
 import CourseHero from '@/components/corsi/HeroCorso';
-import CourseTabs from '@/components/corsi/TabsCorso';
+import CourseTabs from '@/components/corsi/tabs/TabsCorso';
 import CourseCalendar from '@/components/corsi/CalendarioCorso';
 import CourseVideo from '@/components/corsi/VideoCorso';
 import CourseTeachers from '@/components/corsi/TeacherCorsi';
 import Banner from '@/components/ui/Banner';
-import OverviewTab from '@/components/corsi/tabs/OverViewTab';
 import FeatureBar from '@/components/ui/FeatureBar';
 
 import { mockCourse } from '@/lib/mock/Corsi';
+
+import FaqTab from '@/components/corsi/tabs/FAQTab';
+import OverviewTab from '@/components/corsi/tabs/OverViewTab';
+import CertificationTabs from '@/components/corsi/tabs/CertificationTabs';
+import ProgramsTabs from '@/components/corsi/tabs/ProgramsTabs';
 
 function formatCurrency(value?: number | null) {
   if (!value) return '1.000€ + IVA';
@@ -60,6 +62,68 @@ export default async function CorsiPage() {
                     target={course.detail.target}
                   />
                 ),
+              },
+              {
+                id: 'levels',
+                title: 'Livelli',
+                content: <div>Livelli</div>,
+              },
+              {
+                id: 'program',
+                title: 'Programma',
+                content: (
+                  <ProgramsTabs
+                    items={[
+                      'Conoscere la normativa di riferimento e utilizzare correttamente i DPI',
+                      'Valutare i rischi e realizzare ancoraggi sicuri',
+                      'Lavorare in sicurezza su corda ed effettuare soccorsi anche in condizioni difficili',
+                      'Ottenere una certificazione riconosciuta a livello internazionale',
+                    ]}
+                    description="Contattaci per ricevere il programma completo del livello di certificazione per cui desideri frequentare il corso."
+                  />
+                ),
+              },
+              {
+                id: 'certificate',
+                title: 'Certificazione',
+                content: (
+                  <CertificationTabs
+                    title="Certificazione"
+                    items={[
+                      {
+                        icon: '✓',
+                        title: 'Ente certificatore',
+                        content: (
+                          <>
+                            <strong>IRATA International</strong>, la principale associazione mondiale per l accesso e il
+                            lavoro su doppia fune.
+                          </>
+                        ),
+                      },
+                      {
+                        icon: '⏳',
+                        title: 'Validità e rinnovo',
+                        content: (
+                          <>
+                            <p>
+                              La certificazione IRATA ha una validità di <strong>3 anni</strong> dal conseguimento.
+                            </p>
+                            <p className="mt-2">
+                              Entro la scadenza è necessario effettuare il <strong>rinnovo</strong>, frequentando un
+                              corso di formazione della durata di <strong>2 giorni</strong>. Se la certificazione non
+                              viene rinnovata entro la scadenza è necessario ripetere il corso.
+                            </p>
+                          </>
+                        ),
+                      },
+                    ]}
+                  />
+                ),
+              },
+              {
+                id: 'faq',
+                title: 'FAQ',
+                content: <FaqTab />,
               },
             ]}
           />

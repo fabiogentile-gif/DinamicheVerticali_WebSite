@@ -20,15 +20,20 @@ export default function LinkButton({
   return (
     <a
       href={href}
-      className="relative inline-flex h-12 items-center justify-center px-8 clipped-bottom-left"
+      className="group relative inline-flex h-12 items-center justify-center px-8"
       style={{
-        backgroundColor: bg ? backgroundColor : 'transparent',
         color: bg ? '#ffffff' : textColor,
       }}
     >
-      {!bg && (
+      {bg ? (
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 200 48" preserveAspectRatio="none">
-          <path d="M12 48 L0 36 V0 H200 V48 Z" stroke="#1e1e1c" strokeWidth="4" fill="white" />
+          <path d="M0 0 H200 V48 H12 L0 36 Z" fill={backgroundColor} />
+
+          <path d="M0 36 L12 48" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+        </svg>
+      ) : (
+        <svg className="absolute inset-0 h-full w-full" viewBox="0 0 200 48" preserveAspectRatio="none">
+          <path d="M0 36 L12 48 H200 V0 H0 Z" fill="white" stroke="#1e1e1c" strokeWidth="3" />
         </svg>
       )}
 
