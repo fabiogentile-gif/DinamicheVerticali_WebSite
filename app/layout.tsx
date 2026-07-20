@@ -20,8 +20,8 @@ const barlow = Barlow_Condensed({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.dinamichedverticali.it'),
   title: {
-    default: 'Dinamiche Verticali',
-    template: '%s | Dinamiche Verticali',
+    default: 'Dinamiche Verticali Formazione',
+    template: 'Dinamiche Verticali Formazione | %s',
   },
   description: 'Formazione professionale per lavori in quota, funi e sicurezza sul lavoro.',
 };

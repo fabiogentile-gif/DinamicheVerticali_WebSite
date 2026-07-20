@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { profileImage, contactItems, partnerHotels, recentPlaces } from '@/data/contatti';
+import type { Metadata } from 'next';
 
 import HotelSection from '@/components/contatti/HotelSection';
 import TeamCard from '@/components/ui/TeamCard';
+
+import { profileImage, contactItems, partnerHotels, recentPlaces } from '@/data/contatti';
 import { logos } from '@/data/assets';
 
 const partnerLogos = [
@@ -11,6 +13,15 @@ const partnerLogos = [
   { src: logos.gwo, alt: 'Global Wind Organisation' },
   { src: logos.irata, alt: 'IRATA International' },
 ];
+
+
+
+export const metadata: Metadata = {
+  title: 'Contatti',
+  description:
+    'Contatti di Dinamiche Verticali Formazione. Trova informazioni su come contattarci, hotel convenzionati e articoli recenti.',
+  keywords: ['contatti', 'hotel', 'numero di telefono', 'email'],
+};
 
 export default function ContattiPage() {
   return (

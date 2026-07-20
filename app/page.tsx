@@ -1,16 +1,22 @@
 import Image from 'next/image';
+import type { Metadata } from 'next';
+
 import LinkButton from '@/components/ui/Linkbutton';
 import CardCorsi from '@/components/home/CardCorsi';
 import CalendarioCorsi from '@/components/home/CalendarioCorsi';
+import FeatureBar from '@/components/ui/FeatureBar';
+import FAQ from '@/components/home/FAQ';
+import Banner from '@/components/ui/Banner';
 
 import { getCourses } from '@/lib/queries/courses';
 
-import FeatureBar from '@/components/ui/FeatureBar';
-import FAQ from '@/components/home/FAQ';
-import { Ban } from 'lucide-react';
-import Banner from '@/components/ui/Banner';
-
 const imgHero = 'https://www.figma.com/api/mcp/asset/0e8e8eac-9525-4b73-bff1-1a0d40a34cdb';
+
+export const metadata: Metadata = {
+  description:
+    'Scopri i corsi certificati di Dinamiche Verticali per lavori in quota, accesso mediante funi, IRATA, GWO e sicurezza secondo il D.Lgs. 81/08.',
+  keywords: ['corsi lavori in quota', 'corso funi', 'IRATA Italia', 'formazione sicurezza', 'D.Lgs. 81/08', 'Corsi petzl'],
+};
 
 export default async function Home() {
   const courses = await getCourses();

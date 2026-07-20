@@ -85,7 +85,7 @@ export default async function CorsiPage({ params }: Props) {
                 content: (
                   <OverviewTab
                     location={course.location ?? 'Via G. B. Feroggio 54, 10151 - Torino'}
-                    duration={`${course.durationDays ?? 0} giorni formazione + ${course.examDays ?? 0} giorno esame`}
+                    duration={`${course.durationDays ? `${course.durationDays} giorni formazione` : ''}${course.durationDays && course.examDays ? ' + ' : ''}${course.examDays ? `${course.examDays} giorno esame` : ''}`}
                     price={formatCurrency(course.price)}
                     certificate={`${course.certificateDuration ?? 0} anni`}
                     description={course.description ?? ''}

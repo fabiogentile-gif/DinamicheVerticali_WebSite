@@ -3,9 +3,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, CalendarDays, List, ChevronDown } from 'lucide-react';
 
+import { useRouter } from 'next/navigation';
+
 type Course = {
   id: string;
   title: string;
+  slug: string;
   category: {
     name: string;
     slug: string;
@@ -31,6 +34,7 @@ function daysInMonth(year: number, month: number) {
 
 export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
   const today = new Date();
+  const router = useRouter();
 
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
@@ -228,7 +232,8 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
                 return (
                   <div
                     key={index}
-                    className={`relative h-28 p-3 ${event ? 'bg-[#ff6422] text-white' : 'bg-white hover:bg-gray-50'}`}
+                    onClick={() => event && router.push(`/corsi/${event.slug}`)}
+                    className={`relative h-28 p-3 ${event ? 'cursor-pointer bg-[#ff6422] text-white hover:opacity-90' : 'bg-white hover:bg-gray-50'}`}
                   >
                     <span className="font-black">{day}</span>
 
@@ -267,7 +272,11 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
 
             <div className="h-117.5 space-y-3 overflow-y-auto p-5">
               {monthCourses.map((course) => (
-                <div key={course.id} className="border p-4 transition hover:border-[#ff6422]">
+                <div
+                  key={course.id}
+                  onClick={() => router.push(`/corsi/${course.slug}`)}
+                  className="cursor-pointer border p-4 transition hover:border-[#ff6422]"
+                >
                   <h4 className="text-sm font-black uppercase">{course.title}</h4>
 
                   <span className="text-xs font-bold uppercase text-[#ff6422]">{course.category.name}</span>
