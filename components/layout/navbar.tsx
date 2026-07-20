@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { logos } from '@/data/assets';
 
 const navItems = [
   { href: "/", label: "HOME" },
-  { href: "/corsi", label: "CORSI" },
+  { href: "/categorie", label: "CORSI" },
   { href: "/blog", label: "BLOG" },
   { href: "/chi-siamo", label: "CHI SIAMO" },
   { href: "/contatti", label: "CONTATTI" },
@@ -19,7 +20,7 @@ export default function NavBar() {
     <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-[#aaa] bg-white px-6 py-5 shadow-sm">
       <Link href="/" className="flex items-center">
         <Image
-          src="/logos/logo-dinamiche-verticali-formazione.svg"
+          src={logos.dinamicheVerticali}
           alt="Dinamiche Verticali Formazione"
           width={180}
           height={48}

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useId, useState, type FormEvent } from 'react';
+import { logos } from '@/data/assets';
 
 const socialLinks = [
   {
@@ -57,26 +58,16 @@ export default function Footer() {
   return (
     <footer className=" bg-[#f3f3f3] px-6 py-10 text-[#2d2d2d]">
       <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.2fr_1fr_1fr]">
-
         {/* SINISTRA */}
         <div>
-          <Image
-            src="/logos/logo-dinamiche-verticali-formazione.svg"
-            alt="Dinamiche Verticali"
-            width={160}
-            height={55}
-            className="mb-5"
-          />
+          <Image src={logos.dinamicheVerticali} alt="Dinamiche Verticali" width={160} height={55} className="mb-5" />
 
           <div className="space-y-1 text-[15px] leading-7">
             <p>© 2026 Dinamiche Verticali Formazione srl</p>
 
             <p>
               Developed by{' '}
-              <a
-                href="#"
-                className="text-[#f26722] underline transition hover:opacity-80"
-              >
+              <a href="#" className="text-[#f26722] underline transition hover:opacity-80">
                 &lt;/divers&gt;
               </a>
             </p>
@@ -85,11 +76,7 @@ export default function Footer() {
 
             <div className="pt-3 flex flex-col">
               {policyLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-[#f26722] underline transition hover:opacity-80"
-                >
+                <a key={link.label} href={link.href} className="text-[#f26722] underline transition hover:opacity-80">
                   {link.label}
                 </a>
               ))}
@@ -125,14 +112,9 @@ export default function Footer() {
             ))}
           </div>
 
-          <p className="mb-2 text-lg">
-            Iscriviti alla nostra newsletter:
-          </p>
+          <p className="mb-2 text-lg">Iscriviti alla nostra newsletter:</p>
 
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-3 sm:flex-row"
-          >
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
             <label htmlFor={emailId} className="sr-only">
               Email
             </label>
@@ -157,9 +139,7 @@ export default function Footer() {
 
         {/* DESTRA */}
         <div>
-          <h3 className="mb-4 font-[Barlow_Condensed] text-[40px] font-semibold uppercase leading-none">
-            Contatti
-          </h3>
+          <h3 className="mb-4 font-[Barlow_Condensed] text-[40px] font-semibold uppercase leading-none">Contatti</h3>
 
           <div className="flex flex-col gap-2 text-[17px]">
             {contactLinks.map((contact) => (
@@ -179,7 +159,6 @@ export default function Footer() {
             ))}
           </div>
         </div>
-
       </div>
     </footer>
   );

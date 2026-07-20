@@ -13,16 +13,22 @@ datasource db {
 }
 
 model Course {
-  id                  String    @id @default(cuid())
+  id                  String @id @default(cuid())
+
   title               String
+  slug              String @unique
   description         String?
-  category            String
+
+  categoryId          String
+  category            Category @relation(fields: [categoryId], references: [id])
+
   location            String?
   durationDays        Int?
   examDays            Int?
-  time                DateTime?
-  price               Int?
-  certificateDuration Int?
+  time                String?
+  price               Int
+  certificateDuration Int
+  requirements String?
 
   sessions  CourseSession[]
   employees Employee[]
@@ -70,4 +76,14 @@ model Role {
   name String
 
   employees Employee[]
+}
+
+model Category {
+  id          String @id @default(cuid())
+  name        String @unique
+  slug        String @unique
+  description String?
+  image       String?
+
+  courses Course[]
 }

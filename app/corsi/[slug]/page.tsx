@@ -7,7 +7,8 @@ import CourseTeachers from '@/components/corsi/TeacherCorsi';
 import Banner from '@/components/ui/Banner';
 import FeatureBar from '@/components/ui/FeatureBar';
 
-import { mockCourse } from '@/lib/mock/Corsi';
+import { notFound } from 'next/navigation';
+import { getCourseBySlug } from '@/lib/queries/courses';
 
 import FaqTab from '@/components/corsi/tabs/FAQTab';
 import OverviewTab from '@/components/corsi/tabs/OverViewTab';
@@ -20,8 +21,20 @@ function formatCurrency(value?: number | null) {
   return `${value.toLocaleString('it-IT')}€ + IVA`;
 }
 
-export default async function CorsiPage() {
-  const course = mockCourse;
+interface Props {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export default async function CorsiPage({ params }: Props) {
+  const { slug } = await params;
+
+  const course = await getCourseBySlug(slug);
+
+  if (!course) {
+    notFound();
+  }
 
   const events = course.sessions.map((session, index) => ({
     id: index + 1,
@@ -30,18 +43,37 @@ export default async function CorsiPage() {
       month: 'short',
       year: 'numeric',
     }),
-    category: course.tag,
+    category: course.category.name,
     title: course.title,
-    href: `/corsi/${course.id}`,
+    href: `/corsi/${course.slug}`,
   }));
 
   return (
     <>
-      <Breadcrumb items={[{ label: 'Corsi', href: '/corsi' }, { label: course.title }]} />
+      <Breadcrumb
+        items={[
+          {
+            label: 'Categorie',
+            href: '/categorie',
+          },
+          {
+            label: course.category.name,
+            href: `/categorie/${course.category.slug}`,
+          },
+          {
+            label: course.title,
+          },
+        ]}
+      />
 
       <main>
         <section>
-          <CourseHero image={course.bannerImage} imageAlt={course.title} subtitle="Informazioni" title={course.title} />
+          <CourseHero
+            image={course.category.image ?? '/logos/dinamiche-verticali.svg'}
+            imageAlt={course.title}
+            subtitle={course.category.name}
+            title={course.title}
+          />
         </section>
 
         <section>
@@ -52,21 +84,16 @@ export default async function CorsiPage() {
                 title: 'Panoramica',
                 content: (
                   <OverviewTab
-                    location={course.detail.location}
-                    duration={`${course.durationDays} giorni formazione + ${course.examDays} giorno esame`}
-                    schedule={course.detail.schedule}
+                    location={course.location ?? 'Via G. B. Feroggio 54, 10151 - Torino'}
+                    duration={`${course.durationDays ?? 0} giorni formazione + ${course.examDays ?? 0} giorno esame`}
                     price={formatCurrency(course.price)}
-                    certificate={course.detail.certificate}
-                    requirements={course.detail.requirements}
-                    description={course.detail.description}
-                    target={course.detail.target}
+                    certificate={`${course.certificateDuration ?? 0} anni`}
+                    description={course.description ?? ''}
+                    requirements="Per accedere ai corsi occorre essere maggiorenni ed essere in buono stato salute"
+                    target={[]}
+                    schedule="9.00/17.30"
                   />
                 ),
-              },
-              {
-                id: 'levels',
-                title: 'Livelli',
-                content: <div>Livelli</div>,
               },
               {
                 id: 'program',
@@ -135,7 +162,7 @@ export default async function CorsiPage() {
             subtitle="Scopri le prossime date del corso"
             description="Seleziona il livello per filtrare le date disponibili."
             events={events}
-            levels={course.levels}
+            levels={[]}
           />
         </section>
 
@@ -152,19 +179,21 @@ export default async function CorsiPage() {
           <CourseVideo
             title="Video"
             subtitle={`Scopri come si svolge il corso ${course.title}`}
-            videoUrl={course.detail.videoUrl}
-            thumbnail={course.detail.videoThumbnail}
+            videoUrl=""
+            thumbnail=""
           />
         </section>
 
-        <section>
-          <CourseTeachers
-            title="Formatori"
-            subtitle="Ti presentiamo i nostri formatori"
-            description="I formatori di Dinamiche Verticali Formazione sono professionisti con esperienza pluriennale."
-            teachers={course.teachers}
-          />
-        </section>
+        {course.employees.length > 0 && (
+          <section>
+            <CourseTeachers
+              title="Formatori"
+              subtitle="Ti presentiamo i nostri formatori"
+              description="I formatori di Dinamiche Verticali Formazione sono professionisti con esperienza pluriennale."
+              teachers={course.employees}
+            />
+          </section>
+        )}
 
         <section>
           <FeatureBar />

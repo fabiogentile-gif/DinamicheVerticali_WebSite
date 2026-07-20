@@ -4,11 +4,12 @@ import { profileImage, contactItems, partnerHotels, recentPlaces } from '@/data/
 
 import HotelSection from '@/components/contatti/HotelSection';
 import TeamCard from '@/components/ui/TeamCard';
+import { logos } from '@/data/assets';
 
 const partnerLogos = [
-  { src: '/logos/logo-petzl-technical-institute.avif', alt: 'Petzl Technical Institute' },
-  { src: '/logos/logo-global-wind-organisation.avif', alt: 'Global Wind Organisation' },
-  { src: '/logos/logo-irata-international.avif', alt: 'IRATA International' },
+  { src: logos.pti, alt: 'Petzl Technical Institute' },
+  { src: logos.gwo, alt: 'Global Wind Organisation' },
+  { src: logos.irata, alt: 'IRATA International' },
 ];
 
 export default function ContattiPage() {

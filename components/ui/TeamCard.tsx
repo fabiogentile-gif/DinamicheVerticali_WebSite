@@ -23,7 +23,7 @@ export default function TeamCard({ name, role, languages, image }: TeamCardProps
       </svg>
 
       <div className="relative z-10 bg-white" style={{ clipPath: "url(#teamCardClip)" }}>
-        <div className="border-b border-[#aaaaaa] p-6">
+        <div className="border-b border-[#aaaaaa] p-6 h-[180px]">
           <h2 className="text-[26px] font-bold uppercase text-[#ff6316]" style={{ fontFamily: "var(--font-barlow-condensed)" }}>
             {name}
           </h2>

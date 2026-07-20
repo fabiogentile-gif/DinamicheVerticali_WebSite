@@ -1,12 +1,13 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 
-export const profileImage = '/dipendenti/Valentina.png';
+
+export const profileImage = '/dipendenti/Valentina.avif';
 export const hotelOneImage = 'https://www.figma.com/api/mcp/asset/323961fd-1817-459c-8212-7ec90be896d6';
 export const hotelTwoImage = 'https://www.figma.com/api/mcp/asset/00833d4c-3967-4082-8157-69bacde26dfc';
 
-export const recentHotelOneImage = '/hotels/vadala-bed-&-breakfast.png';
-export const recentHotelTwoImage = '/hotels/residenza-delle-alpi.png';
-export const recentHotelThreeImage = '/hotels/cascina-marchesa.png';
+const recentHotelOneImage = '/hotels/vadala-bed-breakfast.avif';
+const recentHotelTwoImage = '/hotels/residenza-delle-alpi.avif';
+const recentHotelThreeImage = '/hotels/cascina-marchesa.avif';
 
 export const contactItems = [
   {

@@ -1,11 +1,12 @@
-import { prisma } from "@/lib/db/prisma";
+import { prisma } from '@/lib/db/prisma';
 
 export async function getCourses() {
   return prisma.course.findMany({
     include: {
+      category: true,
       sessions: {
         orderBy: {
-          startDate: "asc",
+          startDate: 'asc',
         },
       },
       employees: {
@@ -14,9 +15,6 @@ export async function getCourses() {
           roles: true,
         },
       },
-    },
-    orderBy: {
-      createdAt: "desc",
     },
   });
 }
@@ -27,9 +25,10 @@ export async function getCourseById(id: string) {
       id,
     },
     include: {
+      category: true,
       sessions: {
         orderBy: {
-          startDate: "asc",
+          startDate: 'asc',
         },
       },
       employees: {
@@ -42,12 +41,37 @@ export async function getCourseById(id: string) {
   });
 }
 
-export async function getCoursesByCategory(category: string) {
-  return prisma.course.findMany({
+export async function getCourseBySlug(slug: string) {
+  return prisma.course.findUnique({
     where: {
-      category,
+      slug,
     },
     include: {
+      category: true,
+      sessions: {
+        orderBy: {
+          startDate: 'asc',
+        },
+      },
+      employees: {
+        include: {
+          languages: true,
+          roles: true,
+        },
+      },
+    },
+  });
+}
+
+export async function getCoursesByCategory(categorySlug: string) {
+  return prisma.course.findMany({
+    where: {
+      category: {
+        slug: categorySlug,
+      },
+    },
+    include: {
+      category: true,
       sessions: true,
       employees: {
         include: {
@@ -57,7 +81,7 @@ export async function getCoursesByCategory(category: string) {
       },
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 }
@@ -74,16 +98,15 @@ export async function getUpcomingCourses() {
       },
     },
     include: {
+      category: true,
       sessions: {
         orderBy: {
-          startDate: "asc",
+          startDate: 'asc',
         },
       },
     },
     orderBy: {
-      sessions: {
-        _count: "desc",
-      },
+      createdAt: 'desc',
     },
   });
 }

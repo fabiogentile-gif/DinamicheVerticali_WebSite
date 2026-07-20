@@ -6,7 +6,10 @@ import { ChevronLeft, ChevronRight, CalendarDays, List, ChevronDown } from 'luci
 type Course = {
   id: string;
   title: string;
-  category: string;
+  category: {
+    name: string;
+    slug: string;
+  };
   sessions: {
     startDate: Date;
   }[];
@@ -52,7 +55,7 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
   }, []);
 
   const otherCategories = useMemo(() => {
-    return [...new Set(courses.map((course) => course.category))].filter((item) => !mainCategories.includes(item));
+    return [...new Set(courses.map((course) => course.category.name))].filter((item) => !mainCategories.includes(item));
   }, [courses]);
 
   const categories = useMemo(() => {
@@ -64,7 +67,7 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
       return courses;
     }
 
-    return courses.filter((course) => course.category === category);
+    return courses.filter((course) => course.category.name === category);
   }, [courses, category]);
 
   const calendarDays = useMemo(() => {
@@ -233,7 +236,7 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
                       <div className="absolute bottom-3 left-3 right-3">
                         <p className="line-clamp-2 text-xs font-black uppercase leading-tight">{event.title}</p>
 
-                        <p className="mt-1 text-[11px] font-bold uppercase opacity-80">{event.category}</p>
+                        <p className="mt-1 text-[11px] font-bold uppercase opacity-80">{event.category.name}</p>
                       </div>
                     )}
                   </div>
@@ -267,7 +270,7 @@ export default function CalendarioCorsi({ courses }: { courses: Course[] }) {
                 <div key={course.id} className="border p-4 transition hover:border-[#ff6422]">
                   <h4 className="text-sm font-black uppercase">{course.title}</h4>
 
-                  <span className="text-xs font-bold uppercase text-[#ff6422]">{course.category}</span>
+                  <span className="text-xs font-bold uppercase text-[#ff6422]">{course.category.name}</span>
 
                   <p className="mt-2 text-xs text-gray-600">
                     {new Date(course.sessions[0].startDate).toLocaleDateString('it-IT', {
