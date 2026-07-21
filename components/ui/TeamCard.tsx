@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useId } from "react";
 
 interface TeamCardProps {
   name: string;
@@ -8,11 +9,13 @@ interface TeamCardProps {
 }
 
 export default function TeamCard({ name, role, languages, image }: TeamCardProps) {
+  const clipPathId = useId();
+
   return (
     <div className="relative lg:w-[320px] lg:shrink-0">
       <svg width="0" height="0" className="absolute">
         <defs>
-          <clipPath id="teamCardClip" clipPathUnits="objectBoundingBox">
+          <clipPath id={clipPathId} clipPathUnits="objectBoundingBox">
             <path d="M0.003125 0.001923 H0.90625 L0.996875 0.057692 V0.998077 H0.09375 L0.003125 0.942308 V0.001923 Z" />
           </clipPath>
         </defs>
@@ -22,8 +25,8 @@ export default function TeamCard({ name, role, languages, image }: TeamCardProps
         <path d="M1 1 H290 L319 30 V519 H30 L1 490 V1 Z" fill="none" stroke="#aaaaaa" strokeWidth="2" vectorEffect="non-scaling-stroke" />
       </svg>
 
-      <div className="relative z-10 bg-white" style={{ clipPath: "url(#teamCardClip)" }}>
-        <div className="border-b border-[#aaaaaa] p-6 h-[180px]">
+      <div className="relative z-10 bg-white" style={{ clipPath: `url(#${clipPathId})` }}>
+        <div className="border-b border-[#aaaaaa] p-6 h-45">
           <h2 className="text-[26px] font-bold uppercase text-[#ff6316]" style={{ fontFamily: "var(--font-barlow-condensed)" }}>
             {name}
           </h2>
