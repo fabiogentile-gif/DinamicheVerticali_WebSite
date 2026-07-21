@@ -43,9 +43,14 @@ export default function CourseCalendar({ title, subtitle, description, events, l
           )}
 
           <div className="space-y-px border border-border">
-            {events.map((event) => (
-              <CalendarCard key={event.id} event={event} />
-            ))}
+            {events.map((event) => {
+              const href =
+                selectedLevel && levels.length > 0
+                  ? `${event.href}&livello=${encodeURIComponent(selectedLevel)}`
+                  : event.href;
+
+              return <CalendarCard key={event.id} event={{ ...event, href }} />;
+            })}
           </div>
         </div>
       </div>

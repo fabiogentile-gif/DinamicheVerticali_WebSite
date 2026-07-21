@@ -5,14 +5,14 @@ interface CourseVideoProps {
   title: string;
   subtitle: string;
   videoUrl: string;
-  thumbnail: string;
+  thumbnail?: string;
 }
 
 export default function CourseVideo({
   title,
   subtitle,
   videoUrl,
-  thumbnail,
+  thumbnail = '/video-mock/video-image-mock.png',
 }: CourseVideoProps) {
   return (
     <section className="bg-background-lighter py-7">

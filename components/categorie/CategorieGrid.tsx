@@ -1,19 +1,21 @@
-import CategoryCard from '@/components/altri/CardCategoria';
+import CategoryCard from '@/components/categorie/CategoryCard';
 
-interface Props {
-  categories: {
-    id: string;
-    name: string;
-    slug: string;
-    description: string | null;
-    image: string | null;
-    _count: {
-      courses: number;
-    };
-  }[];
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  image: string | null;
+  _count: {
+    courses: number;
+  };
 }
 
-export default function OtherCoursesGrid({ categories }: Props) {
+interface CategorieGridProps {
+  categories: Category[];
+}
+
+export default function CategorieGrid({ categories }: CategorieGridProps) {
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {categories.map((category) => (

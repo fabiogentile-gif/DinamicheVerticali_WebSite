@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
-import type { Article } from '@/components/blog/article';
+import type { Article } from '@/lib/types/article';
 import articles from '@/data/articles.json';
 
 function getArticleBySlug(slug: string): Article | undefined {

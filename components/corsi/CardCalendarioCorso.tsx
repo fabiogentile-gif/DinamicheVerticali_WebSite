@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 export interface CalendarEvent {
-  id: number;
+  id: string;
   day: string;
   month: string;
   category: string;

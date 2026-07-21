@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 import LinkButton from '@/components/ui/Linkbutton';
 import CardCorsi from '@/components/home/CardCorsi';
-import CalendarioCorsi from '@/components/home/CalendarioCorsi';
+import CalendarioCorsi from '@/components/ui/CalendarioCorsi';
 import FeatureBar from '@/components/ui/FeatureBar';
 import FAQ from '@/components/home/FAQ';
 import Banner from '@/components/ui/Banner';

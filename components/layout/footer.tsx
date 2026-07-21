@@ -130,7 +130,7 @@ export default function Footer() {
 
             <button
               type="submit"
-              className="h-11 bg-[#f26722] px-7 font-semibold uppercase text-white transition hover:bg-[#de5d1d] clipped-bottom-left"
+              className="h-11 bg-[#f26722] px-7 font-semibold uppercase text-white transition hover:bg-[#de5d1d] clipped-bottom-left-low "
             >
               ISCRIVITI
             </button>

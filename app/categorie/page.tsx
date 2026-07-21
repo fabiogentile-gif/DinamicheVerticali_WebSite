@@ -1,90 +1,82 @@
+import type { Metadata } from 'next';
 import Breadcrumb from '@/components/ui/BreadCrumb';
 import LinkButton from '@/components/ui/Linkbutton';
-import OtherCoursesGrid from '@/components/altri/AltroGridCorsi';
+import CategorieGrid from '@/components/categorie/CategorieGrid';
+import Banner from '@/components/ui/Banner';
+import FeatureBar from '@/components/ui/FeatureBar';
 
 import { getOtherCategories } from '@/lib/queries/getOtherCategories';
 
+export const metadata: Metadata = {
+  title: 'Categorie Corsi | Dinamiche Verticali',
+  description:
+    'Esplora tutte le categorie di corsi di formazione certificati: IRATA, GWO, Petzl Technical Institute (PTI), Fune D.Lgs. 81/08, ITRA e sicurezza sul lavoro.',
+};
+
 export default async function OtherCoursesPage() {
-    const categories = await getOtherCategories();
+  const categories = await getOtherCategories();
 
   return (
-    <main className="bg-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-[#1E1E1C]">
-        <div className="mx-auto flex min-h-[420px] max-w-7xl items-center px-6 py-20 lg:px-8">
-          <div className="max-w-2xl">
-            <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Altri corsi' }]} />
+    <main className="bg-white min-h-screen text-[#1e1e1c]">
+      {/* Breadcrumb Navigation */}
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Categorie Corsi' }]} />
 
-            <span className="mb-4 inline-block border border-[#FF6316] px-4 py-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#FF6316]">
-              Formazione
+      {/* Hero Section */}
+      <section className="relative isolate overflow-hidden bg-[#1e1e1c] text-white py-16 lg:py-24">
+        {/* Glow backdrop effect */}
+        <div className="absolute -right-40 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-primary/15 blur-3xl pointer-events-none" />
+        <div className="absolute -left-40 -bottom-20 h-[400px] w-[400px] rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="max-w-3xl space-y-6">
+            <span className="inline-block border border-primary px-3.5 py-1 font-heading text-xs font-bold uppercase tracking-[0.2em] text-primary">
+              Categorie & Certificazioni
             </span>
 
-            <h1 className="text-5xl font-bold leading-tight text-white lg:text-6xl">
-              Altri corsi
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold uppercase leading-none tracking-tight text-white">
+              Tutte le Categorie Formative
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-8 text-neutral-300">
-              Esplora tutti i corsi che completano la nostra offerta formativa.
-              Formazione professionale dedicata ad aziende, operatori e tecnici
-              con programmi aggiornati e certificazioni riconosciute.
+            <p className="text-lg leading-relaxed text-neutral-300">
+              Scopri i percorsi formativi di Dinamiche Verticali. Offriamo certificazioni internazionali riconosciute
+              (IRATA, GWO, PTI, ITRA) e corsi di sicurezza sul lavoro in conformità al D.Lgs. 81/08 per lavori in quota,
+              accesso su fune e spazi confinati.
             </p>
 
-            <div className="mt-10">
-              <LinkButton
-                title="Richiedi informazioni"
-                href="/contatti"
-                bg
-              />
+            <div className="pt-2 flex flex-wrap items-center gap-4">
+              <LinkButton title="Richiedi Informazioni" href="/contatti" bg />
             </div>
           </div>
         </div>
-
-        <div className="absolute -right-40 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[#FF6316]/10 blur-3xl" />
       </section>
 
-      {/* Intro */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="max-w-3xl">
-          <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#FF6316]">
-            Categorie
-          </span>
-
-          <h2 className="mt-3 text-4xl font-bold text-[#1E1E1C]">
-            Scegli l area di formazione
+      {/* Main Categories Section */}
+      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
+        <div className="mb-12 max-w-3xl">
+          <p className="font-heading text-sm font-semibold uppercase tracking-wider text-primary">
+            Offerta Formativa
+          </p>
+          <h2 className="mt-2 font-heading text-3xl sm:text-4xl font-bold uppercase text-[#1e1e1c]">
+            Scegli l’Area di Formazione
           </h2>
-
-          <p className="mt-6 text-lg leading-8 text-neutral-600">
-            Oltre ai percorsi IRATA, GWO e ai corsi su fune, proponiamo numerosi
-            corsi dedicati alla sicurezza sul lavoro, all utilizzo di
-            attrezzature e alla formazione tecnica per aziende e professionisti.
+          <p className="mt-4 text-base leading-relaxed text-neutral-600">
+            Seleziona la categoria di tuo interesse per consultare la scheda dettagliata dei corsi disponibili,
+            le prossime date in calendario e le modalità d'iscrizione.
           </p>
         </div>
 
-        <div className="mt-16">
-          <OtherCoursesGrid categories={categories} />
-        </div>
+        <CategorieGrid categories={categories} />
       </section>
 
-      {/* CTA */}
-      <section className="bg-[#FF6316]">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 py-16 lg:flex-row lg:items-center lg:px-8">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl font-bold text-white">
-              Non trovi il corso che stai cercando?
-            </h2>
+      {/* Banner CTA */}
+      <Banner
+        subtitle="Serve aiuto o una consulenza?"
+        title="Ti aiutiamo a scegliere il corso più adatto alle tue esigenze"
+        buttonText="Contattaci"
+        buttonHref="/contatti"
+      />
 
-            <p className="mt-4 text-lg text-orange-100">
-              Organizziamo corsi personalizzati presso la tua azienda e
-              realizziamo percorsi formativi in base alle esigenze del tuo team.
-            </p>
-          </div>
-
-          <LinkButton
-            title="Contattaci"
-            href="/contatti"
-          />
-        </div>
-      </section>
+      <FeatureBar />
     </main>
   );
 }

@@ -1,6 +1,10 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 
+import AboutCta from '@/components/chi-siamo/AboutCta';
+import AboutStats from '@/components/ui/AboutStats';
+import Testimonials from '@/components/chi-siamo/Testimonials';
+
 export const metadata: Metadata = {
   title: 'Chi siamo',
   description:
@@ -33,8 +37,10 @@ const paragraphs = [
 
 function FramedImage({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative h-[280px] overflow-hidden sm:h-[350px] clipped-bottom-left clipped-top-right">
-      <Image src={src} alt={alt} fill className="object-cover" sizes="(min-width: 1024px) 485px, 100vw" />
+    <div className="h-[280px] overflow-hidden sm:h-[350px] clipped-bottom-left">
+      <div className="relative h-full w-full overflow-hidden clipped-top-right">
+        <Image src={src} alt={alt} fill className="object-cover" sizes="(min-width: 1024px) 485px, 100vw" />
+      </div>
     </div>
   );
 }
@@ -70,6 +76,11 @@ export default function ChiSiamoPage() {
             </div>
           </section>
         ))}
+      </div>
+      <div className="-mx-6 mt-10 sm:-mx-8 sm:mt-14">
+        <AboutStats />
+        <AboutCta />
+        <Testimonials />
       </div>
     </main>
   );

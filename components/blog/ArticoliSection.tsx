@@ -1,6 +1,6 @@
 import { ArrowRight,ArrowLeft  } from 'lucide-react';
 import ArticleCard from './ArticoliCard';
-import { Article } from './article';
+import { Article } from '@/lib/types/article';
 
 interface ArticleSectionProps {
   title: string;

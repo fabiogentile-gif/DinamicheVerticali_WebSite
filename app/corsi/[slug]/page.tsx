@@ -1,7 +1,7 @@
 import Breadcrumb from '@/components/ui/BreadCrumb';
-import CourseHero from '@/components/corsi/HeroCorso';
+import CourseHero from '@/components/ui/HeroCorso';
 import CourseTabs from '@/components/corsi/tabs/TabsCorso';
-import CourseCalendar from '@/components/corsi/CalendarioCorso';
+import CourseCalendar from '@/components/ui/CalendarioCorsi';
 import CourseVideo from '@/components/corsi/VideoCorso';
 import CourseTeachers from '@/components/corsi/TeacherCorsi';
 import Banner from '@/components/ui/Banner';
@@ -21,6 +21,8 @@ function formatCurrency(value?: number | null) {
   return `${value.toLocaleString('it-IT')}€ + IVA`;
 }
 
+const IRATA_LEVELS = ['Livello 1', 'Livello 2', 'Livello 3'];
+
 interface Props {
   params: Promise<{
     slug: string;
@@ -36,8 +38,11 @@ export default async function CorsiPage({ params }: Props) {
     notFound();
   }
 
-  const events = course.sessions.map((session, index) => ({
-    id: index + 1,
+  const courseLevels =
+    course.slug.toLowerCase().includes('irata') || course.title.toLowerCase().includes('irata') ? IRATA_LEVELS : [];
+
+  const events = course.sessions.map((session) => ({
+    id: session.id,
     day: session.startDate.getDate().toString(),
     month: session.startDate.toLocaleDateString('it-IT', {
       month: 'short',
@@ -45,7 +50,7 @@ export default async function CorsiPage({ params }: Props) {
     }),
     category: course.category.name,
     title: course.title,
-    href: `/corsi/${course.slug}`,
+    href: `/corsi/${course.slug}/iscrizione?session=${encodeURIComponent(session.id)}`,
   }));
 
   return (
@@ -157,13 +162,7 @@ export default async function CorsiPage({ params }: Props) {
         </section>
 
         <section>
-          <CourseCalendar
-            title="Calendario"
-            subtitle="Scopri le prossime date del corso"
-            description="Seleziona il livello per filtrare le date disponibili."
-            events={events}
-            levels={[]}
-          />
+          <CourseCalendar course={course}/>
         </section>
 
         <section>
@@ -180,7 +179,6 @@ export default async function CorsiPage({ params }: Props) {
             title="Video"
             subtitle={`Scopri come si svolge il corso ${course.title}`}
             videoUrl=""
-            thumbnail=""
           />
         </section>
 
