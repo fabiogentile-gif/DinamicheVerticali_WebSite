@@ -267,14 +267,24 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
         </div>
       ) : (
         <div className="border">
-          <header className="bg-black px-4 py-3 text-white sm:px-8 sm:py-5">
-            <h3 className="font-condensed text-xl font-black uppercase sm:text-3xl">
-              {new Date(year, month).toLocaleString('it-IT', {
-                month: 'long',
-                year: 'numeric',
-              })}
-            </h3>
-            <p className="mt-1 text-sm text-gray-300">{allSessions.length} sessioni disponibili</p>
+          <header className="flex items-center justify-between bg-black px-4 py-3 text-white sm:px-8 sm:py-5">
+            <button onClick={() => changeMonth(-1)}>
+              <ChevronLeft size={24} className="sm:h-[30px] sm:w-[30px]" />
+            </button>
+
+            <div className="text-center">
+              <h3 className="font-condensed text-xl font-black uppercase sm:text-3xl">
+                {new Date(year, month).toLocaleString('it-IT', {
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </h3>
+              <p className="mt-1 text-sm text-gray-300">{allSessions.length} sessioni disponibili</p>
+            </div>
+
+            <button onClick={() => changeMonth(1)}>
+              <ChevronRight size={24} className="sm:h-[30px] sm:w-[30px]" />
+            </button>
           </header>
 
           {allSessions.length === 0 ? (

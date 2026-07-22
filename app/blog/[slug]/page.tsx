@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 
 import type { Article } from '@/lib/types/article';
 import articles from '@/data/articles.json';
@@ -26,6 +27,20 @@ interface Props {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
+
+  if (!article) {
+    return { title: 'Articolo non trovato' };
+  }
+
+  return {
+    title: article.title,
+    description: article.intro.slice(0, 160),
+  };
 }
 
 export default async function ArticlePage({ params }: Props) {

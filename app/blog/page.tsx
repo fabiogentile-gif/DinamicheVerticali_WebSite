@@ -3,13 +3,15 @@ import NewsletterBanner from '@/components/blog/NewsLetterBanner';
 import ArticoliSection from '@/components/blog/ArticoliSection';
 
 import articles from '@/data/articles.json';
+import type { Metadata } from 'next';
 
 const featuredImage = '/articoli/blog-hero.avif';
-const articleImages = [
-  '/articoli/irata-articolo-1.avif',
-  '/articoli/irata-articolo-2.avif',
-  '/articoli/irata-articolo-3.avif',
-];
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Articoli sulla formazione per lavori in quota, certificazioni IRATA, GWO, sicurezza sul lavoro e consigli per operatori su fune.',
+};
 
 export default function BlogPage() {
   const featuredArticles = articles.filter((a) => a.featured);

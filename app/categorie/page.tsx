@@ -8,7 +8,7 @@ import FeatureBar from '@/components/ui/FeatureBar';
 import { getOtherCategories } from '@/lib/queries/getOtherCategories';
 
 export const metadata: Metadata = {
-  title: 'Categorie Corsi | Dinamiche Verticali',
+  title: 'Categorie Corsi',
   description:
     'Esplora tutte le categorie di corsi di formazione certificati: IRATA, GWO, Petzl Technical Institute (PTI), Fune D.Lgs. 81/08, ITRA e sicurezza sul lavoro.',
 };

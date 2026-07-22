@@ -9,6 +9,7 @@ import FeatureBar from '@/components/ui/FeatureBar';
 
 import { notFound } from 'next/navigation';
 import { getCourseBySlug } from '@/lib/queries/courses';
+import type { Metadata } from 'next';
 
 import FaqTab from '@/components/corsi/tabs/FAQTab';
 import OverviewTab from '@/components/corsi/tabs/OverViewTab';
@@ -27,6 +28,22 @@ interface Props {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const course = await getCourseBySlug(slug);
+
+  if (!course) {
+    return { title: 'Corso non trovato' };
+  }
+
+  return {
+    title: course.title,
+    description:
+      course.description ||
+      `Corso ${course.title} - ${course.category.name}. ${course.durationDays} giorni, prezzo ${course.price}€. Certificazione valida ${course.certificateDuration} anni.`,
+  };
 }
 
 export default async function CorsiPage({ params }: Props) {

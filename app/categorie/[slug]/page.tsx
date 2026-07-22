@@ -21,12 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!category) {
     return {
-      title: 'Categoria non trovata | Dinamiche Verticali',
+      title: 'Categoria non trovata',
     };
   }
 
   return {
-    title: `Corsi ${category.name} | Dinamiche Verticali`,
+    title: `Corsi ${category.name}`,
     description:
       category.description ||
       `Scopri tutti i corsi certificati della categoria ${category.name} con Dinamiche Verticali. Formazione professionale e percorsi su misura.`,
