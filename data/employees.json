@@ -1,0 +1,8 @@
+[
+  { "id": "diego-maltenti", "name": "Diego", "surname": "Maltenti", "image": "/dipendenti/diego-maltenti.avif", "languages": ["lang-italiano", "lang-inglese"], "roles": ["role-irata-l3", "role-irata-ta", "role-formatore-gwo"] },
+  { "id": "franco-bignami", "name": "Franco", "surname": "Bignami", "image": "/dipendenti/franco-bignami.avif", "languages": ["lang-italiano"], "roles": ["role-irata-l3"] },
+  { "id": "giuseppe-barucco", "name": "Giuseppe", "surname": "Barucco", "image": "/dipendenti/giuseppe-barucco.avif", "languages": ["lang-italiano", "lang-francese"], "roles": ["role-formatore-pti", "role-guida-alpina"] },
+  { "id": "michele-perotti", "name": "Michele", "surname": "Perotti", "image": "/dipendenti/michele-perotti.avif", "languages": ["lang-italiano", "lang-inglese", "lang-francese"], "roles": ["role-formatore-pti", "role-guida-alpina"] },
+  { "id": "alberto-fantone", "name": "Alberto", "surname": "Fantone", "image": "/dipendenti/alberto-fantone.avif", "languages": ["lang-italiano", "lang-francese"], "roles": ["role-formatore-pti", "role-guida-alpina"] },
+  { "id": "luigi-gagliardi", "name": "Luigi", "surname": "Gagliardi", "image": "/dipendenti/luigi-gagliardi.avif", "languages": ["lang-italiano", "lang-inglese"], "roles": ["role-formatore-pti", "role-guida-alpina"] }
+]

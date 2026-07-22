@@ -1,112 +1,27 @@
-import { prisma } from '@/lib/db/prisma';
+import {
+  getAllCourses as _getAllCourses,
+  getCourseById as _getCourseById,
+  getCourseBySlug as _getCourseBySlug,
+  getCoursesByCategory as _getCoursesByCategory,
+  getUpcomingCourses as _getUpcomingCourses,
+} from '@/data/db';
 
 export async function getCourses() {
-  return prisma.course.findMany({
-    include: {
-      category: true,
-      sessions: {
-        orderBy: {
-          startDate: 'asc',
-        },
-      },
-      employees: {
-        include: {
-          languages: true,
-          roles: true,
-        },
-      },
-    },
-  });
+  return _getAllCourses();
 }
 
 export async function getCourseById(id: string) {
-  return prisma.course.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      category: true,
-      sessions: {
-        orderBy: {
-          startDate: 'asc',
-        },
-      },
-      employees: {
-        include: {
-          languages: true,
-          roles: true,
-        },
-      },
-    },
-  });
+  return _getCourseById(id);
 }
 
 export async function getCourseBySlug(slug: string) {
-  return prisma.course.findUnique({
-    where: {
-      slug,
-    },
-    include: {
-      category: true,
-      sessions: {
-        orderBy: {
-          startDate: 'asc',
-        },
-      },
-      employees: {
-        include: {
-          languages: true,
-          roles: true,
-        },
-      },
-    },
-  });
+  return _getCourseBySlug(slug);
 }
 
 export async function getCoursesByCategory(categorySlug: string) {
-  return prisma.course.findMany({
-    where: {
-      category: {
-        slug: categorySlug,
-      },
-    },
-    include: {
-      category: true,
-      sessions: true,
-      employees: {
-        include: {
-          languages: true,
-          roles: true,
-        },
-      },
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
+  return _getCoursesByCategory(categorySlug);
 }
 
 export async function getUpcomingCourses() {
-  return prisma.course.findMany({
-    where: {
-      sessions: {
-        some: {
-          startDate: {
-            gte: new Date(),
-          },
-        },
-      },
-    },
-    include: {
-      category: true,
-      sessions: {
-        orderBy: {
-          startDate: 'asc',
-        },
-      },
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
+  return _getUpcomingCourses();
 }

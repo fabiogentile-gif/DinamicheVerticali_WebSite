@@ -1,0 +1,7 @@
+[
+  { "id": "role-irata-l3", "name": "IRATA L3/i" },
+  { "id": "role-formatore-pti", "name": "Formatore PTI" },
+  { "id": "role-formatore-gwo", "name": "Formatore GWO" },
+  { "id": "role-guida-alpina", "name": "Guida Alpina" },
+  { "id": "role-irata-ta", "name": "IRATA Technical Authority" }
+]

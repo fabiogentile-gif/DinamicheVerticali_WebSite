@@ -12,7 +12,7 @@ function getArticleBySlug(slug: string): Article | undefined {
 
 function getHeroImage(image?: string) {
   if (!image || !image.startsWith('http')) {
-    return '/articoli/fallback-articoli.jpg';
+    return '/articoli/fallback-articoli.avif';
   }
 
   return image;
@@ -56,7 +56,7 @@ export default async function ArticlePage({ params }: Props) {
 
               <div className="relative h-80 w-full overflow-hidden border border-[#aaaaaa] bg-[#f7f7f7] sm:h-105">
                 <Image
-                  src={article.image || '/articoli/fallback-articoli.jpg'}
+                  src={article.image || '/articoli/fallback-articoli.avif'}
                   alt={article.title}
                   fill
                   priority

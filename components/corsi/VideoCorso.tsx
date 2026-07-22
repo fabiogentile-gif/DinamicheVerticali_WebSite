@@ -12,7 +12,7 @@ export default function CourseVideo({
   title,
   subtitle,
   videoUrl,
-  thumbnail = '/video-mock/video-image-mock.png',
+  thumbnail = '/video-mock/video-image-mock.avif',
 }: CourseVideoProps) {
   return (
     <section className="bg-background-lighter py-7">

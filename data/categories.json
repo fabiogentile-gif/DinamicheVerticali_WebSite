@@ -1,0 +1,11 @@
+[
+  { "id": "cat-irata", "name": "IRATA", "slug": "irata", "description": "Industrial Rope Access Trade Association", "image": "/logos/irata.svg" },
+  { "id": "cat-gwo", "name": "GWO", "slug": "gwo", "description": "Global Wind Organisation", "image": "/logos/gwo.svg" },
+  { "id": "cat-pti", "name": "PTI", "slug": "pti", "description": "Petzl Technical Institute", "image": "/logos/pti.svg" },
+  { "id": "cat-fune", "name": "Fune D.Lgs. 81/08", "slug": "fune-dlgs-81-08", "description": "Formazione per lavori temporanei in quota mediante funi", "image": null },
+  { "id": "cat-corsi-accreditati", "name": "Corsi accreditati", "slug": "corsi-accreditati", "description": "Percorsi formativi riconosciuti per professionisti e aziende", "image": null },
+  { "id": "cat-itra", "name": "ITRA", "slug": "itra", "description": "International Technical Rescue Association", "image": "/logos/itra.svg" },
+  { "id": "cat-spazi-confinati", "name": "Spazi confinati", "slug": "spazi-confinati", "description": "Formazione e addestramento per ambienti confinati", "image": null },
+  { "id": "cat-lavori-quota", "name": "Lavori in Quota", "slug": "lavori-in-quota", "description": "Piattaforme di lavoro elevabili", "image": null },
+  { "id": "cat-soccorso", "name": "Soccorso", "slug": "soccorso", "description": "Formazione aziendale primo soccorso", "image": null }
+]

@@ -21,7 +21,7 @@ export default function ArticleCard({ title, intro, slug, image, category, date 
     <Link href={`/blog/${slug}`} className="block h-full">
       <article className="flex h-full min-h-[520px] flex-col overflow-hidden border border-[#aaaaaa] bg-[#f7f7f7] transition hover:-translate-y-1">
         <div className="relative h-[260px] w-full overflow-hidden">
-          <Image src={image || '/articoli/fallback-articoli.jpg'} alt={title} fill className="object-cover" />
+          <Image src={image || '/articoli/fallback-articoli.avif'} alt={title} fill className="object-cover" />
         </div>
 
         <div className="flex flex-1 flex-col gap-5 p-6">

@@ -2,17 +2,17 @@ const reviews = [
   {
     quote: 'Professionalità e competenza sono il loro punto di forza.',
     author: 'Marco',
-    image: '/testimonials/marco-testimonial.png',
+    image: '/testimonials/marco-testimonial.avif',
   },
   {
     quote: 'Accoglienti, preparati e professionali. Sempre eccezionale.',
     author: 'Camilo',
-    image: '/testimonials/camilo-testimonial.png',
+    image: '/testimonials/camilo-testimonial.avif',
   },
   {
     quote: 'Professionali e simpatici, sanno quello che fanno e lo trasmettono con passione.',
     author: 'Erik M.',
-    image: '/testimonials/erik-testimonial.png',
+    image: '/testimonials/erik-testimonial.avif',
   },
 ];
 

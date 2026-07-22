@@ -26,7 +26,7 @@ export default function ContactSupport() {
         <article className="w-full max-w-62.5">
           <div className="relative h-75 overflow-hidden clipped-top-right">
             <Image
-              src="/images/contatti/valentina.png"
+              src="/images/contatti/valentina.avif"
               alt="Valentina, coordinatrice logistica"
               fill
               className="object-cover"

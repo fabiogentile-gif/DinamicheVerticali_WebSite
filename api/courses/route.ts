@@ -1,11 +1,6 @@
-import { prisma } from "@/lib/db/prisma";
+import { getAllCourses } from '@/data/db';
 
 export async function GET() {
-  const courses = await prisma.course.findMany({
-    include: {
-      sessions: true,
-    },
-  });
-
+  const courses = getAllCourses();
   return Response.json(courses);
 }

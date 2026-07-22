@@ -10,7 +10,7 @@ import Banner from '@/components/ui/Banner';
 
 import { getCourses } from '@/lib/queries/courses';
 
-const imgHero = 'https://www.figma.com/api/mcp/asset/0e8e8eac-9525-4b73-bff1-1a0d40a34cdb';
+const imgHero = '/images/hero.avif';
 
 export const metadata: Metadata = {
   description:

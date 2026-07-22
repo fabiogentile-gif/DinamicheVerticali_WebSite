@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const paragraphs = [
   {
     title: 'Formazione pratica, per far propria la sicurezza',
-    image: '/images/chi-siamo/formazione-pratica.png',
+    image: '/images/chi-siamo/formazione-pratica.avif',
     imageAlt: 'Formazione pratica per lavori in quota',
     content: [
       'Nel mondo verticale non basta conoscere una tecnica. Servono esperienza, preparazione, metodo e una profonda cultura della sicurezza.',
@@ -25,7 +25,7 @@ const paragraphs = [
   },
   {
     title: 'Un centro di formazione unico',
-    image: '/images/chi-siamo/centro-formazione.png',
+    image: '/images/chi-siamo/centro-formazione.avif',
     imageAlt: 'Centro di formazione Dinamiche Verticali',
     content: [
       'Dinamiche Verticali è un centro accreditato per corsi IRATA, GWO e PTI e rappresenta l’unico ed esclusivo Petzl Technical Institute in Italia.',
