@@ -179,7 +179,7 @@ export default async function CorsiPage({ params }: Props) {
         </section>
 
         <section className="pb-16">
-          <CourseCalendar course={course}/>
+          <CourseCalendar course={course} defaultView="list"/>
         </section>
 
         <section>

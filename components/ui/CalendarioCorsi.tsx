@@ -21,6 +21,7 @@ type Course = {
 interface Props {
   courses?: Course[];
   course?: Course;
+  defaultView?: 'calendar' | 'list';
 }
 
 const mainCategories = ['Tutti', 'IRATA', 'GWO', 'PTI'];
@@ -37,7 +38,7 @@ function daysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-export default function CalendarioCorsi({ courses = [], course }: Props) {
+export default function CalendarioCorsi({ courses = [], course, defaultView = 'calendar' }: Props) {
   const router = useRouter();
   const today = new Date();
 
@@ -53,7 +54,7 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
   const [year, setYear] = useState(nextSession?.getFullYear() ?? today.getFullYear());
   const [category, setCategory] = useState(course?.category.name ?? 'Tutti');
 
-  const [view, setView] = useState<'calendar' | 'list'>('calendar');
+  const [view, setView] = useState<'calendar' | 'list'>(defaultView);
   const [showOthers, setShowOthers] = useState(false);
 
   const othersRef = useRef<HTMLDivElement>(null);
@@ -248,17 +249,22 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
                 <div
                   key={index}
                   onClick={() => event && router.push(`/corsi/${event.slug}/iscrizione?session=${event.sessionId}`)}
-                  className={`relative h-16 p-1 sm:h-28 sm:p-3 ${
-                    event ? 'cursor-pointer bg-[#ff6422] text-white' : 'bg-white hover:bg-gray-50'
+                  className={`group relative h-16 p-1 sm:h-28 sm:p-3 ${
+                    event
+                      ? 'cursor-pointer bg-[#ff6422] text-white hover:brightness-110 hover:ring-2 hover:ring-white/40 hover:ring-offset-2 hover:ring-offset-[#ff6422] transition-all'
+                      : 'bg-white hover:bg-gray-50'
                   }`}
                 >
                   <span className="text-xs font-black sm:text-base">{day}</span>
 
                   {event && (
-                    <div className="absolute bottom-1 left-1 right-1 sm:bottom-3 sm:left-3 sm:right-3">
-                      <p className="line-clamp-2 text-[8px] font-black uppercase sm:text-xs">{event.title}</p>
-                      <p className="hidden text-[11px] uppercase opacity-80 sm:block">{event.category.name}</p>
-                    </div>
+                    <>
+                      <span className="absolute top-1 right-1 rounded bg-black/70 px-2 py-0.5 text-[9px] font-bold text-white uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity sm:top-3 sm:right-3 sm:text-xs">Iscriviti →</span>
+                      <div className="absolute bottom-1 left-1 right-1 sm:bottom-3 sm:left-3 sm:right-3">
+                        <p className="line-clamp-2 text-[8px] font-black uppercase sm:text-xs">{event.title}</p>
+                        <p className="hidden text-[11px] uppercase opacity-80 sm:block">{event.category.name}</p>
+                      </div>
+                    </>
                   )}
                 </div>
               );
@@ -297,7 +303,7 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
                 <div
                   key={sessionId}
                   onClick={() => router.push(`/corsi/${c.slug}/iscrizione?session=${sessionId}`)}
-                  className="flex items-center gap-4 p-4 transition hover:bg-orange-50 cursor-pointer sm:gap-6 sm:p-5"
+                  className="group flex items-center gap-4 p-4 transition-all hover:bg-orange-50 hover:ring-2 hover:ring-[#ff6422]/30 cursor-pointer sm:gap-6 sm:p-5"
                 >
                   <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center bg-[#ff6422] text-white sm:h-16 sm:w-16">
                     <span className="text-lg font-black leading-none sm:text-xl">
@@ -313,7 +319,8 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
                     <span className="text-xs font-bold uppercase text-[#ff6422]">{c.category.name}</span>
                   </div>
 
-                  <ChevronRight size={18} className="shrink-0 text-gray-400" />
+                  <span className="hidden shrink-0 rounded bg-[#ff6422] px-3 py-1.5 text-xs font-bold text-white uppercase opacity-0 group-hover:opacity-100 transition-opacity sm:block">Prenota</span>
+                  <ChevronRight size={20} className="shrink-0 text-[#ff6422] transition-transform group-hover:translate-x-1" />
                 </div>
               ))}
             </div>

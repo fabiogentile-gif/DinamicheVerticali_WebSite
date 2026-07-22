@@ -78,7 +78,7 @@ export default async function Home() {
         </div>
       </section>
       <section>
-        <CalendarioCorsi courses={courses} />
+        <CalendarioCorsi courses={courses} defaultView="calendar" />
       </section>
 
       <FAQ />
