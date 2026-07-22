@@ -19,7 +19,7 @@ interface ArticleCardProps {
 export default function ArticleCard({ title, intro, slug, image, category, date }: ArticleCardProps) {
   return (
     <Link href={`/blog/${slug}`} className="block h-full">
-      <article className="flex h-full min-h-[520px] flex-col overflow-hidden border border-[#aaaaaa] bg-[#f7f7f7] transition hover:-translate-y-1">
+      <article className="flex h-full min-h-[400px] flex-col overflow-hidden border border-[#aaaaaa] bg-[#f7f7f7] transition hover:-translate-y-1 sm:min-h-[520px]">
         <div className="relative h-[260px] w-full overflow-hidden">
           <Image src={image || '/articoli/fallback-articoli.avif'} alt={title} fill className="object-cover" />
         </div>
@@ -31,7 +31,7 @@ export default function ArticleCard({ title, intro, slug, image, category, date 
               <span className="text-black">{date}</span>
             </div>
 
-            <h3 className="font-heading text-[32px] font-semibold uppercase leading-none">{title}</h3>
+            <h3 className="font-heading text-2xl font-semibold uppercase leading-none sm:text-[32px]">{title}</h3>
 
             <p className="line-clamp-4 text-[16px] leading-7">{intro}</p>
           </div>

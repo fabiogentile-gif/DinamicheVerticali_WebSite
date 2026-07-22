@@ -35,11 +35,11 @@ export default function ContattiPage() {
             </p>
 
             <h2 className="mt-2 text-[36px] font-bold uppercase" style={{ fontFamily: 'var(--font-barlow-condensed)' }}>
-              Trova il tuo hotel più vicino
+              TROVA la sistemazione che fa per te
             </h2>
 
             <p className="mx-auto mt-3 max-w-2xl leading-7">
-              Abbiamo selezionato alcune strutture convenzionate nelle vicinanze della sede dei corsi.
+              Se il tuo corso dura più giorni, puoi affidarti ad una delle strutture ricettive in elenco.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default function ContattiPage() {
           {/* Articoli recenti */}
           <div className="mt-20 border-t border-[#d8d8d8] pt-14">
             <h3 className="text-[28px] font-bold uppercase" style={{ fontFamily: 'var(--font-barlow-condensed)' }}>
-              Articoli recenti
+              Hotel consigliati
             </h3>
           </div>
 

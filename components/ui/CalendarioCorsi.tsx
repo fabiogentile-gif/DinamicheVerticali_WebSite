@@ -53,7 +53,7 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
   const [year, setYear] = useState(nextSession?.getFullYear() ?? today.getFullYear());
   const [category, setCategory] = useState(course?.category.name ?? 'Tutti');
 
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [view, setView] = useState<'calendar' | 'list'>('calendar');
   const [showOthers, setShowOthers] = useState(false);
 
   const othersRef = useRef<HTMLDivElement>(null);
@@ -123,6 +123,19 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
     [filteredCourses, year, month],
   );
 
+  const allSessions = useMemo(() => {
+    const sessions: { course: Course; sessionId: string; date: Date }[] = [];
+    filteredCourses.forEach((item) => {
+      item.sessions.forEach((session) => {
+        const date = new Date(session.startDate);
+        if (date.getFullYear() === year && date.getMonth() === month) {
+          sessions.push({ course: item, sessionId: session.id, date });
+        }
+      });
+    });
+    return sessions.sort((a, b) => a.date.getTime() - b.date.getTime());
+  }, [filteredCourses, year, month]);
+
   function changeMonth(value: number) {
     const date = new Date(year, month + value);
 
@@ -134,7 +147,7 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
     <section className="mx-auto w-full max-w-375 px-4">
       <div className="mb-8 text-center">
         <h3 className="font-condensed text-xl font-bold uppercase text-[#ff6422]">Calendario</h3>
-        <h2 className="font-condensed mt-2 text-4xl font-black uppercase">Scopri le prossime date dei corsi</h2>
+        <h2 className="font-condensed mt-2 text-2xl font-black uppercase sm:text-4xl">Scopri le prossime date dei corsi</h2>
       </div>
 
       <div className="mb-5 flex items-center gap-3">
@@ -185,106 +198,118 @@ export default function CalendarioCorsi({ courses = [], course }: Props) {
 
         <div className="ml-auto flex">
           <button
-            onClick={() => setShowSidebar(false)}
-            className={`border p-3 ${!showSidebar ? 'bg-black text-white' : ''}`}
+            onClick={() => setView('calendar')}
+            className={`border p-3 transition ${view === 'calendar' ? 'bg-black text-white' : 'hover:bg-gray-100'}`}
           >
             <CalendarDays size={20} />
           </button>
 
           <button
-            onClick={() => setShowSidebar(true)}
-            className={`border p-3 ${showSidebar ? 'bg-[#ff6422] text-white' : ''}`}
+            onClick={() => setView('list')}
+            className={`border p-3 transition ${view === 'list' ? 'bg-[#ff6422] text-white' : 'hover:bg-gray-100'}`}
           >
             <List size={20} />
           </button>
         </div>
       </div>
 
-      <div className="flex gap-6 overflow-hidden">
-        <div className={`transition-all duration-500 ${showSidebar ? 'w-[70%]' : 'w-full'}`}>
-          <div className="border">
-            <header className="flex items-center justify-between bg-black px-8 py-5 text-white">
-              <button onClick={() => changeMonth(-1)}>
-                <ChevronLeft size={30} />
-              </button>
+      {view === 'calendar' ? (
+        <div className="border">
+          <header className="flex items-center justify-between bg-black px-4 py-3 text-white sm:px-8 sm:py-5">
+            <button onClick={() => changeMonth(-1)}>
+              <ChevronLeft size={24} className="sm:h-[30px] sm:w-[30px]" />
+            </button>
 
-              <h3 className="font-condensed text-3xl font-black uppercase">
-                {new Date(year, month).toLocaleString('it-IT', {
-                  month: 'long',
-                  year: 'numeric',
-                })}
-              </h3>
-
-              <button onClick={() => changeMonth(1)}>
-                <ChevronRight size={30} />
-              </button>
-            </header>
-
-            <div className="grid grid-cols-7 gap-px bg-gray-200">
-              {['LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB', 'DOM'].map((day) => (
-                <div key={day} className="bg-white py-3 text-center text-xs font-black text-gray-500">
-                  {day}
-                </div>
-              ))}
-
-              {calendarDays.map((day, index) => {
-                if (!day) return <div key={index} className="h-28 bg-gray-50" />;
-
-                const event = courseAt(day);
-
-                return (
-                  <div
-                    key={index}
-                    onClick={() => event && router.push(`/corsi/${event.slug}/iscrizione?session=${event.sessionId}`)}
-                    className={`relative h-28 p-3 ${
-                      event ? 'cursor-pointer bg-[#ff6422] text-white' : 'bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    <span className="font-black">{day}</span>
-
-                    {event && (
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <p className="line-clamp-2 text-xs font-black uppercase">{event.title}</p>
-                        <p className="text-[11px] uppercase opacity-80">{event.category.name}</p>
-                      </div>
-                    )}
-                  </div>
-                );
+            <h3 className="font-condensed text-xl font-black uppercase sm:text-3xl">
+              {new Date(year, month).toLocaleString('it-IT', {
+                month: 'long',
+                year: 'numeric',
               })}
-            </div>
+            </h3>
+
+            <button onClick={() => changeMonth(1)}>
+              <ChevronRight size={24} className="sm:h-[30px] sm:w-[30px]" />
+            </button>
+          </header>
+
+          <div className="grid grid-cols-7 gap-px bg-gray-200">
+            {['LUN', 'MAR', 'MER', 'GIO', 'VEN', 'SAB', 'DOM'].map((day) => (
+              <div key={day} className="bg-white py-2 text-center text-[10px] font-black text-gray-500 sm:text-xs">
+                {day}
+              </div>
+            ))}
+
+            {calendarDays.map((day, index) => {
+              if (!day) return <div key={index} className="hidden bg-gray-50 sm:block sm:h-28" />;
+
+              const event = courseAt(day);
+
+              return (
+                <div
+                  key={index}
+                  onClick={() => event && router.push(`/corsi/${event.slug}/iscrizione?session=${event.sessionId}`)}
+                  className={`relative h-16 p-1 sm:h-28 sm:p-3 ${
+                    event ? 'cursor-pointer bg-[#ff6422] text-white' : 'bg-white hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="text-xs font-black sm:text-base">{day}</span>
+
+                  {event && (
+                    <div className="absolute bottom-1 left-1 right-1 sm:bottom-3 sm:left-3 sm:right-3">
+                      <p className="line-clamp-2 text-[8px] font-black uppercase sm:text-xs">{event.title}</p>
+                      <p className="hidden text-[11px] uppercase opacity-80 sm:block">{event.category.name}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
+      ) : (
+        <div className="border">
+          <header className="bg-black px-4 py-3 text-white sm:px-8 sm:py-5">
+            <h3 className="font-condensed text-xl font-black uppercase sm:text-3xl">
+              {new Date(year, month).toLocaleString('it-IT', {
+                month: 'long',
+                year: 'numeric',
+              })}
+            </h3>
+            <p className="mt-1 text-sm text-gray-300">{allSessions.length} sessioni disponibili</p>
+          </header>
 
-        {showSidebar && (
-          <aside className="w-[30%] border bg-white">
-            <div className="border-b p-5">
-              <h3 className="font-condensed text-2xl font-black uppercase">
-                Corsi di{' '}
-                <span className="text-[#ff6422]">
-                  {new Date(year, month).toLocaleString('it-IT', {
-                    month: 'long',
-                  })}
-                </span>
-              </h3>
-
-              <p className="mt-2 text-sm text-gray-500">{monthCourses.length} corsi disponibili</p>
+          {allSessions.length === 0 ? (
+            <div className="p-8 text-center text-gray-400">
+              Nessuna sessione disponibile per questo mese.
             </div>
-
-            <div className="space-y-3 p-5">
-              {monthCourses.map((item) => (
+          ) : (
+            <div className="divide-y">
+              {allSessions.map(({ course: c, sessionId, date }) => (
                 <div
-                  key={item.id}
-                  onClick={() => router.push(`/corsi/${item.slug}/iscrizione?session=${item.sessions[0].id}`)}
-                  className="cursor-pointer border p-4 hover:border-[#ff6422]"
+                  key={sessionId}
+                  onClick={() => router.push(`/corsi/${c.slug}/iscrizione?session=${sessionId}`)}
+                  className="flex items-center gap-4 p-4 transition hover:bg-orange-50 cursor-pointer sm:gap-6 sm:p-5"
                 >
-                  <h4 className="text-sm font-black uppercase">{item.title}</h4>
-                  <span className="text-xs font-bold uppercase text-[#ff6422]">{item.category.name}</span>
+                  <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center bg-[#ff6422] text-white sm:h-16 sm:w-16">
+                    <span className="text-lg font-black leading-none sm:text-xl">
+                      {date.toLocaleDateString('it-IT', { day: '2-digit' })}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase sm:text-xs">
+                      {date.toLocaleDateString('it-IT', { month: 'short' })}
+                    </span>
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <h4 className="truncate text-sm font-black uppercase sm:text-base">{c.title}</h4>
+                    <span className="text-xs font-bold uppercase text-[#ff6422]">{c.category.name}</span>
+                  </div>
+
+                  <ChevronRight size={18} className="shrink-0 text-gray-400" />
                 </div>
               ))}
             </div>
-          </aside>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </section>
   );
 }

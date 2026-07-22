@@ -86,7 +86,7 @@ export default function Footer() {
 
         {/* CENTRO */}
         <div>
-          <h3 className="mb-4 font-[Barlow_Condensed] text-[40px] font-semibold uppercase leading-none">
+          <h3 className="mb-4 font-[Barlow_Condensed] text-2xl font-semibold uppercase leading-none sm:text-[40px]">
             Non perderti le novità
           </h3>
 
@@ -139,7 +139,7 @@ export default function Footer() {
 
         {/* DESTRA */}
         <div>
-          <h3 className="mb-4 font-[Barlow_Condensed] text-[40px] font-semibold uppercase leading-none">Contatti</h3>
+          <h3 className="mb-4 font-[Barlow_Condensed] text-2xl font-semibold uppercase leading-none sm:text-[40px]">Contatti</h3>
 
           <div className="flex flex-col gap-2 text-[17px]">
             {contactLinks.map((contact) => (

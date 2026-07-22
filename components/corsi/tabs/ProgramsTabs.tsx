@@ -26,7 +26,7 @@ export default function ProgramsTabs({ title = 'PROGRAMMA', subtitle = 'Obiettiv
         </ul>
 
         {description && (
-          <div className="mt-4 flex items-center justify-between gap-4 pt-3">
+          <div className="mt-4 flex flex-col items-start gap-4 pt-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-xl text-sm text-[#444]">{description}</p>
 
             <button className="group flex shrink-0 items-center gap-2 text-sm font-bold text-[#ff6316]">

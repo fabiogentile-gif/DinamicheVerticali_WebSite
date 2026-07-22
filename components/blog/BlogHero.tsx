@@ -51,7 +51,7 @@ export default function BlogHero({ image, category, title, description }: BlogHe
         <div className="flex flex-col gap-5">
           <p className="font-heading text-[24px] font-semibold uppercase text-primary">{category}</p>
 
-          <h1 className="font-heading text-[40px] font-bold uppercase leading-none">{title}</h1>
+          <h1 className="font-heading text-2xl font-bold uppercase leading-none sm:text-[40px]">{title}</h1>
 
           <p className="max-w-xl text-[16px] leading-7">{description}</p>
 

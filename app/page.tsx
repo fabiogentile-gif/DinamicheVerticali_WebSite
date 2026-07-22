@@ -33,9 +33,9 @@ export default async function Home() {
           priority
         />
         <div className="absolute inset-0 bg-white/40" />
-        <div className="relative mx-auto flex min-h-185 max-w-7xl flex-col justify-center gap-8 px-6 py-24 lg:px-20">
+        <div className="relative mx-auto flex min-h-100 max-w-7xl flex-col justify-center gap-8 px-6 py-16 sm:min-h-140 sm:py-20 lg:min-h-185 lg:px-20 lg:py-24">
           <div className="max-w-120 space-y-5">
-            <div className="font-manrope space-y-2 text-[64px] leading-[0.95] font-bold tracking-[-0.03em] uppercase">
+            <div className="font-manrope space-y-2 text-[36px] leading-[0.95] font-bold tracking-[-0.03em] uppercase sm:text-[48px] lg:text-[64px]">
               <h3 className="text-[#1e1e1c]">Formazione certificata</h3>
               <h3 className="text-primary">per lavori in quota</h3>
             </div>

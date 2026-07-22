@@ -35,7 +35,7 @@ export default function CourseTabs({ tabs, defaultTab }: CourseTabsProps) {
           ))}
         </div>
 
-        <div className="mt-4 border border-border bg-background-lighter p-8">
+        <div className="mt-4 border border-border bg-background-lighter p-4 sm:p-8">
           {activeContent?.content}
         </div>
       </div>
