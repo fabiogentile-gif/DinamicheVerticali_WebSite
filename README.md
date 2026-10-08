@@ -25,6 +25,7 @@ Link live demo [DEMO](https://dinamiche-verticali.vercel.app/ "DEMO")
 You can take all the files of this site and run them just on your computer as if it were live online, only it's just on your machine.
 
 Requirements
+
 [node.js](https://nodejs.org/en)
 
 [Git]("https://git-scm.com/install/windows") (Optional)
