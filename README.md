@@ -26,6 +26,7 @@ You can take all the files of this site and run them just on your computer as if
 
 Requirements
 [node.js](https://nodejs.org/en)
+
 [Git]("https://git-scm.com/install/windows") (Optional)
 
 To copy the repository's files from here onto your computer and to view and serve those files locally, at your computer's command line type:
